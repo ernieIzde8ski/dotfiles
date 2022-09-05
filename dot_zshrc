@@ -1,0 +1,20 @@
+
+# The following lines were added by compinstall
+zstyle :compinstall filename '/home/ernie/.zshrc'
+
+autoload -Uz compinit
+compinit
+# End of lines added by compinstall
+# Lines configured by zsh-newuser-install
+HISTFILE=~/.histfile
+HISTSIZE=1000
+SAVEHIST=1000
+setopt autocd beep nomatch notify
+unsetopt extendedglob
+bindkey -v
+# End of lines configured by zsh-newuser-install
+
+export CLICOLOR=1
+alias py="python3"
+
+eval $(thefuck --alias)
