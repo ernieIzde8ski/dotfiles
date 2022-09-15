@@ -21,4 +21,3 @@ export PATH="$PATH:/home/ernie/.local/bin"
 alias py="python3"
 
 eval $(thefuck --alias)
-c
