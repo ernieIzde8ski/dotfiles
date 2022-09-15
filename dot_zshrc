@@ -14,9 +14,11 @@ unsetopt extendedglob
 bindkey -v
 # End of lines configured by zsh-newuser-install
 
-export PATH="$PATH:/home/ernie/.local/bin"
 export CLICOLOR=1
+export EDITOR="code --wait"
+export PATH="$PATH:/home/ernie/.local/bin"
 
 alias py="python3"
 
 eval $(thefuck --alias)
+c
