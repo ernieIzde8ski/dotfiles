@@ -16,7 +16,7 @@ bindkey -v
 
 export CLICOLOR=1
 export EDITOR="code --wait"
-export PATH="$PATH:/home/ernie/.local/bin"
+export PATH="$PATH:$HOME/.local/bin"
 export LESSCHARSET="utf-8" # fix man pages not displaying apostrophes
 
 alias py="python3"
