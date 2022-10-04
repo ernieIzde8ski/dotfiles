@@ -23,4 +23,10 @@ alias py="python3"
 alias ls="ls --color=auto"
 
 
-eval $(thefuck --alias)
+if [ -f "$HOME/.zshrc-extra" ]; then
+    source "$HOME/.zshrc-extra"
+fi
+
+if which thefuck > /dev/null; then
+    eval $(thefuck --alias)
+fi
