@@ -1,0 +1,14 @@
+{
+    "colorcolumn": 80,
+    "colorscheme": "cmc-16",
+    "diffgutter": true,
+    "keepautoindent": true,
+    "mkparents": true,
+    "rmtrailingws": true,
+    "scrollbar": true,
+    "scrollspeed": 1,
+    "softwrap": true,
+    "tabsize": 2,
+    "tabstospaces": true,
+    "wordwrap": true
+}
