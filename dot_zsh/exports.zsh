@@ -16,7 +16,7 @@ vscode="$(which code)"
 if [[ -x $vscode && $DISPLAY ]]; then
     # --wait makes it wait for files to close before exiting process
     # - permits reading stdin
-    export EDITOR="$vscode --wait -"
+    export EDITOR=("$vscode" "--wait" "-")
 else
     editors=("micro" "nano" "vim")
     for editor in $editors; do
