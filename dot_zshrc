@@ -14,6 +14,10 @@ unsetopt extendedglob
 bindkey -v
 # End of lines configured by zsh-newuser-install
 
+# define function array
+precmd_functions=( )
+
+# load extra scripts
 for script in $HOME/.zsh/*.zsh; do
   source $script
 done
