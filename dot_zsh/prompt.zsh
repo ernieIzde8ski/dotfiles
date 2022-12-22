@@ -13,6 +13,7 @@ if [[ $(tput colors 2>/dev/null) -ge 8 ]]; then
 fi
 
 shlvl="$MAGENTA$SHLVL$NORMAL"
+venv_notice="$YELLOW(venv) $NORMAL"
 
 if [[ $UID -eq 0 ]]; then
   user="$RED$USER$NORMAL"
@@ -27,7 +28,11 @@ function colorize_prompt {
     exit_code="$RED$?$NORMAL"
   fi
 
-  export PS1="[$shlvl ${exit_code}] $user$BLUE@$CYAN%m$BLUE%# $NORMAL"
+  if [[ -v VIRTUAL_ENV ]]; then
+    venv=$venv_notice
+  fi
+
+  export PS1="[$shlvl ${exit_code}] $venv$user$BLUE@$CYAN%m$BLUE%# $NORMAL"
 }
 
 precmd_functions+=( colorize_prompt )
