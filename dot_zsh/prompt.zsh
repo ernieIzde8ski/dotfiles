@@ -30,6 +30,8 @@ function colorize_prompt {
 
   if [[ -v VIRTUAL_ENV ]]; then
     venv=$venv_notice
+  else
+    venv=""
   fi
 
   export PS1="[$shlvl ${exit_code}] $venv$user$BLUE@$CYAN%m$BLUE%# $NORMAL"
