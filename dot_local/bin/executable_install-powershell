@@ -1,0 +1,32 @@
+#!/bin/zsh
+
+# install script mostly as suggested by the official documentation:
+# https://learn.microsoft.com/en-us/powershell/scripting/install/install-other-linux?view=powershell-7.3#installation-using-a-binary-archive-file
+
+if [ $UID -ne 0 ]; then
+    echo "Must be run as root!"
+    exit 1
+fi
+
+pwsh_version="7.3.0"
+pwsh_url="https://github.com/PowerShell/PowerShell/releases/download/v${pwsh_version}/powershell-${pwsh_version}-linux-x64.tar.gz"
+
+pwsh_source="/tmp/powershell-${pwsh_version}.tar.gz"
+pwsh_target="/opt/microsoft/powershell/7"
+
+echo "Downloading archive . . ."
+curl -L -o $pwsh_source $pwsh_url
+
+
+echo "Extracting tarball . . ."
+mkdir -p $pwsh_target
+tar zxf $pwsh_source -C $pwsh_target
+
+echo "Making powershell script executable . . ."
+chmod +x "${pwsh_target}/pwsh"
+
+echo "Creating symbolic link . . ."
+if [[ -x "/usr/local/bin/pwsh" ]]; then
+    unlink "/usr/local/bin/pwsh"
+fi
+ln -s "${pwsh_target}/pwsh" "/usr/local/bin/"
