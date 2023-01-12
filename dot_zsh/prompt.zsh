@@ -22,10 +22,11 @@ else
 fi
 
 function colorize_prompt {
-  if [[ $? -eq 0 ]]; then
-    exit_code="$GREEN$?$NORMAL"
+  exit_code="$?"
+  if [[ "$exit_code" -eq '0' ]]; then
+    exit_code="$GREEN$exit_code$NORMAL"
   else
-    exit_code="$RED$?$NORMAL"
+    exit_code="$RED$exit_code$NORMAL"
   fi
 
   if [[ -v VIRTUAL_ENV ]]; then
