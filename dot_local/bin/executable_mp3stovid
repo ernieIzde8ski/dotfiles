@@ -1,0 +1,55 @@
+#!/bin/zsh
+# this makes the script crash on any command error
+set -e
+
+if [[ ! -v 1 ]]; then
+    echo "usage: $0 <folder> [image-path]" 1>&2
+    exit 1
+fi
+
+# getting arguments
+
+srcdir=`readlink -e $1`
+target_mp3="/tmp/mp3tovid-output.mp3"
+target_video="${srcdir}/mp3stovid-output.mp4"
+
+# the AUDIO_SUFFIX value can be customized for folders that contain non-mp3 formats
+if [[ ! -v AUDIO_SUFFIX ]]; then
+    AUDIO_SUFFIX="mp3"
+fi
+
+# validation to make the $cover variable exist
+if [[ -v 2 ]]; then
+    # in the case that the variable was directly provided
+    if [[ -f "$2" ]]; then
+        cover="$2"
+    else
+        cover=`readlink -e $srcdir/$2`
+    fi
+else
+    # in the case it was not provided, try to find it in the source directory
+    covers=("Cover.jpg" "Folder.jpg" "folder.jpg" "Front.jpg")
+    for i in $covers; do
+        echo $i
+        if [[ -f "$srcdir/$i" ]]; then
+            cover="$srcdir/$i"
+            break
+        fi
+    done
+    # in the case cover was never defined, then
+    if [[ ! -v cover ]]; then
+        echo 'cover image not found, please set manually' 1>&2
+        exit 2
+    fi
+fi
+
+
+# https://unix.stackexchange.com/questions/657519/how-to-convert-output-mp3-to-mp4-with-ffmpeg
+# the first line concatenates the audio files, and the second creates a 1920x1080 video from it
+echo '% Compiling audio files...'
+ffmpeg -f concat -safe 0 -i <(for f in "$srcdir"/*."$AUDIO_SUFFIX"(.); do echo "file '$f'"; done) -c copy "$target_mp3"
+echo '% Compiling video...'
+ffmpeg -loop 1 -i "$cover" -i "$target_mp3" -vf "scale=1920:1080:force_original_aspect_ratio=decrease,pad=1920:1080:-1:-1:color=black,setsar=1,format=yuv420p" -shortest -fflags +shortest "$target_video"
+echo "% Successfully compiled video at ${target_video}!"
+echo '% Cleaning up mp3 file...'
+rm "$target_mp3"
