@@ -1,3 +1,6 @@
+if [[ `tty` == '/dev/tty1' && -f ~/.xinitrc ]] && command -v startx &>/dev/null; then
+  startx -- vt7
+fi
 
 # The following lines were added by compinstall
 zstyle :compinstall filename '/home/ernie/.zshrc'
