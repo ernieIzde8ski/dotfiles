@@ -1,7 +1,5 @@
 #!/bin/zsh
 
-
-
 export PATH="$PATH:$HOME/.local/bin"
 
 # these are all related I think ?
