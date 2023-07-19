@@ -17,7 +17,7 @@ bindkey -v
 precmd_functions=( )
 
 # load extra scripts
-for script in $HOME/.zsh/*.zsh; do
+for script in $HOME/.config/zsh/*.zsh; do
   source $script
 done
 
