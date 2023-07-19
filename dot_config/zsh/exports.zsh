@@ -7,20 +7,20 @@ export CLICOLOR=1
 export LESSCHARSET="utf-8" # fix man pages not displaying apostrophes
 alias ls="ls --color=auto"
 
-# setting $EDITOR
-# against another's better judgement I have used vscode anyways
+### setting EDITOR
 
-if [[ "$VSCODE_SHELL_INTEGRATION" == 1 ]]; then
+# set vscode as $EDITOR when run in a vscode terminal
+if [[ "$VSCODE_SHELL_INTEGRATION" == 1 || "$VSCODE_INJECTION" == 1 ]]; then
     # --wait makes it wait for files to close before exiting process
     # - permits reading stdin
     export EDITOR="$(command -v code) --wait -"
+# otherwise pick from micro, nano, or vim
 else
     editors=("micro" "nano" "vim")
     for editor in $editors; do
-        fp="$(which $editor)"
-        if [[ -x $fp ]]; then
-            export EDITOR=$fp
+        editor="$(command -v ${editor})" && {
+            export EDITOR=$editor
             break
-        fi
+        }
     done
 fi

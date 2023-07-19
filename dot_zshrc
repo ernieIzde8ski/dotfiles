@@ -21,6 +21,6 @@ for script in $HOME/.config/zsh/*.zsh; do
   source $script
 done
 
-if which thefuck > /dev/null; then
+if command -v thefuck > /dev/null; then
     eval $(thefuck --alias)
 fi
