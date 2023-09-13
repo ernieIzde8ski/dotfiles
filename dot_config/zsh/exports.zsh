@@ -1,13 +1,25 @@
 #!/bin/zsh
 
-export PATH="$PATH:$HOME/.local/bin"
+# default variables
+export WINEPREFIX="${WINEPREFIX:-$HOME/.cache/wine}"
+export NEWVOID="${NEWVOID:-/mnt/NEWVOID}"
 
-# these are all related I think ?
+
+# updating $PATH to reflect my environment
+export PATH="$HOME/.local/bin:$PATH"
+gempath="/usr/lib/ruby/gems"
+for rbpath in $(ls -r "$gempath" 2>/dev/null); do
+    export PATH="$PATH:$gempath/$rbpath/bin"
+done
+mountpoint "$NEWVOID" &>/dev/null && export PATH="$NEWVOID/Random/CEDev/bin:$PATH"
+
+
+# resolving technical issues
+export GPG_TTY="${GPG_TTY:-`tty`}"
 export CLICOLOR=1
 export LESSCHARSET="utf-8" # fix man pages not displaying apostrophes
 alias ls="ls --color=auto"
 
-### setting EDITOR
 
 # set vscode as $EDITOR when run in a vscode terminal
 if [[ "$VSCODE_SHELL_INTEGRATION" == 1 || "$VSCODE_INJECTION" == 1 ]]; then
