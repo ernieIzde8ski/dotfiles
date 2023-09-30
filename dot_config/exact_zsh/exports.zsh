@@ -4,15 +4,15 @@
 export WINEPREFIX="${WINEPREFIX:-$HOME/.cache/wine}"
 export NEWVOID="${NEWVOID:-/mnt/NEWVOID}"
 
-
 # updating $PATH to reflect my environment
-export PATH="$HOME/.local/bin:$PATH"
+test -d "$HOME/.cargo/bin" && PATH="$HOME/.cargo/bin:$PATH" 
+mountpoint "$NEWVOID" &>/dev/null && PATH="$NEWVOID/Random/CEDev/bin:$PATH"
 gempath="/usr/lib/ruby/gems"
 for rbpath in $(ls -r "$gempath" 2>/dev/null); do
     export PATH="$PATH:$gempath/$rbpath/bin"
 done
-mountpoint "$NEWVOID" &>/dev/null && export PATH="$NEWVOID/Random/CEDev/bin:$PATH"
-
+PATH="$HOME/.local/bin:$PATH"
+export PATH
 
 # resolving technical issues
 export GPG_TTY="${GPG_TTY:-`tty`}"
