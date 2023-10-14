@@ -1,11 +1,14 @@
 #!/bin/zsh
 
+# useful command--reset a git directory to a clean state
+alias gpristine='git reset --hard && git clean -dfx'
+
 # default variables
 export WINEPREFIX="${WINEPREFIX:-$HOME/.cache/wine}"
 export NEWVOID="${NEWVOID:-/mnt/NEWVOID}"
 
 # updating $PATH to reflect my environment
-test -d "$HOME/.cargo/bin" && PATH="$HOME/.cargo/bin:$PATH" 
+test -d "$HOME/.cargo/bin" && PATH="$HOME/.cargo/bin:$PATH"
 mountpoint "$NEWVOID" &>/dev/null && PATH="$NEWVOID/Random/CEDev/bin:$PATH"
 gempath="/usr/lib/ruby/gems"
 for rbpath in $(ls -r "$gempath" 2>/dev/null); do
