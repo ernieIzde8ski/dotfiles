@@ -10,32 +10,44 @@ if [[ $(tput colors 2>/dev/null) -ge 8 ]]; then
   MAGENTA="$(tput setaf 5)"
   CYAN="$(tput setaf 6)"
   WHITE="$(tput setaf 7)"
+  GRAY="$(tput setaf 8)"
+
+  # makes sure command output is uncolored
+  function preexec {
+    echo -n $NORMAL
+  }
 fi
 
-shlvl="$MAGENTA$SHLVL$NORMAL"
-venv_notice="$YELLOW(venv) $NORMAL"
+prompt_shlvl="$MAGENTA$SHLVL$NORMAL"
 
-if [[ $UID -eq 0 ]]; then
-  user="$RED$USER$NORMAL"
-else
-  user="$CYAN$USER$NORMAL"
-fi
-
-function colorize_prompt {
-  exit_code="$?"
-  if [[ "$exit_code" -eq '0' ]]; then
-    exit_code="$GREEN$exit_code$NORMAL"
+function prompt_exit_code {
+  if [[ $? -eq 0 ]]; then
+    echo -n "$GREEN$?$NORMAL"
   else
-    exit_code="$RED$exit_code$NORMAL"
+    echo -n "$RED$?$NORMAL"
   fi
-
-  if [[ -v VIRTUAL_ENV ]]; then
-    venv=$venv_notice
-  else
-    venv=""
-  fi
-
-  export PS1="[$shlvl ${exit_code}] $venv$user$BLUE@$CYAN%m$BLUE%# $NORMAL"
 }
 
-precmd_functions+=( colorize_prompt )
+function prompt_venv {
+  if [[ -v VIRTUAL_ENV ]]; then
+    echo -n "$YELLOW(venv) $NORMAL"
+  fi
+}
+
+function prompt_workstation {
+  # printing out red for root, cyan for anyone else
+  if [[ $UID -eq 0 ]]; then
+    echo -n $RED
+  else
+    echo -n $CYAN
+  fi
+
+  echo -n "$USER$BLUE@$CYAN%m$BLUE%#"
+}
+
+# make sure Python venvs don't override the prompt
+export VIRTUAL_ENV_DISABLE_PROMPT=1
+
+# with this opt, we can delay evaluation using "\$(command)" syntax
+setopt prompt_subst
+PROMPT="[${prompt_shlvl} \$(prompt_exit_code)] \$(prompt_venv)$(prompt_workstation) ${GRAY}"
