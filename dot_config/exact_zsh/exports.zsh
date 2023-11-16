@@ -6,7 +6,7 @@ alias gpristine='git reset --hard && git clean -dfx'
 # default variables
 export WINEPREFIX="${WINEPREFIX:-$HOME/.cache/wine}"
 export NEWVOID="${NEWVOID:-/mnt/NEWVOID}"
-[[ -v CARGO_HOME ]] || CARGO_HOME="$HOME/.local/share/cargo"
+export CARGO_HOME="${CARGO_HOME:-$HOME/.local/share/cargo}"
 [[ -f "$CARGO_HOME/env" ]] && source "$CARGO_HOME/env"
 
 # updating $PATH to reflect my environment
@@ -20,11 +20,10 @@ PATH="$HOME/.local/bin:$PATH"
 export PATH
 
 # resolving technical issues
-export GPG_TTY="${GPG_TTY:-`tty`}"
+export GPG_TTY="${GPG_TTY:-$(tty)}"
 export CLICOLOR=1
 export LESSCHARSET="utf-8" # fix man pages not displaying apostrophes
 alias ls="ls --color=auto"
-
 
 # set vscode as $EDITOR when run in a vscode terminal
 if [[ "$VSCODE_SHELL_INTEGRATION" == 1 || "$VSCODE_INJECTION" == 1 ]]; then
