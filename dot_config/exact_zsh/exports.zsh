@@ -6,9 +6,11 @@ alias gpristine='git reset --hard && git clean -dfx'
 # default variables
 export WINEPREFIX="${WINEPREFIX:-$HOME/.cache/wine}"
 export NEWVOID="${NEWVOID:-/mnt/NEWVOID}"
+[[ -v CARGO_HOME ]] || CARGO_HOME="$HOME/.local/share/cargo"
+[[ -f "$CARGO_HOME/env" ]] && source "$CARGO_HOME/env"
 
 # updating $PATH to reflect my environment
-test -d "$HOME/.cargo/bin" && PATH="$HOME/.cargo/bin:$PATH"
+[[ -d "$CARGO_HOME/bin" ]] && PATH="$CARGO_HOME/bin:$PATH"
 mountpoint "$NEWVOID" &>/dev/null && PATH="$NEWVOID/Random/CEDev/bin:$PATH"
 gempath="/usr/lib/ruby/gems"
 for rbpath in $(ls -r "$gempath" 2>/dev/null); do
