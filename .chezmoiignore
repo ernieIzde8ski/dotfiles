@@ -18,4 +18,8 @@ pyproject.toml
 {{ if not (lookPath "zsh") }}
     .zshrc
     .config/zsh/
+    # in a move of Ultimate Pettiness, I delete bash configs whenever zsh is installed
+    .bash_history
+    .bash_logout
+    .bashrc
 {{ end }}
