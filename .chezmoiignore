@@ -1,4 +1,21 @@
+# --- Generic ignores
+# --- # These apply to every system.
+
 README.md
 pyproject.toml
 **/__pycache__
 .vscode/
+
+# --- Program-specific bindings
+# These configs are disabled when their respective programs are not
+# installed. I did this mainly to make my dotfiles less cluttered,
+# so it's not a real concern if not all programs have entries.
+
+{{ if not (lookPath "ghostwriter") }}
+    .config/kde.org/ghostwriter.conf
+{{ end }}
+
+{{ if not (lookPath "zsh") }}
+    .zshrc
+    .config/zsh/
+{{ end }}
