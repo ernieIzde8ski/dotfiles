@@ -8,7 +8,7 @@
     "scrollbar": true,
     "scrollspeed": 1,
     "softwrap": true,
-    "tabsize": 2,
+    "sucmd": "doas",
     "tabstospaces": true,
     "wordwrap": true
 }
