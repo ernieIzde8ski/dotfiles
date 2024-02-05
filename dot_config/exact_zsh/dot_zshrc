@@ -5,7 +5,7 @@ autoload -Uz compinit
 compinit
 # End of lines added by compinstall
 # Lines configured by zsh-newuser-install
-HISTFILE=~/.histfile
+HISTFILE=$HOME/.local/share/.zsh_history
 HISTSIZE=1000
 SAVEHIST=1000
 setopt autocd beep nomatch notify
@@ -17,7 +17,7 @@ bindkey -v
 precmd_functions=( )
 
 # load extra scripts
-for script in $HOME/.config/zsh/*.zsh; do
+for script in "$ZDOTDIR"/*.zsh; do
   source $script
 done
 

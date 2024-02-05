@@ -3,3 +3,5 @@
 .bash_history
 .gitconfig
 .config/chezmoi/chezmoi.toml
+.histfile
+.zshrc
