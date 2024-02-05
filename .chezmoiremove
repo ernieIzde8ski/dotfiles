@@ -2,3 +2,4 @@
 .bash_logout
 .bash_history
 .gitconfig
+.config/chezmoi/chezmoi.toml

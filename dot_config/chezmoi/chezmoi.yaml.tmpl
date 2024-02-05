@@ -1,0 +1,12 @@
+mode: "symlink"
+data:
+  local:{{ with index . "local" }}
+    # COMMENTS WILL NOT BE PRESERVED
+    # DELETE `data.local` AND EXECUTE `chezmoi apply` TO RESET TO DEFAULTS
+    gpgSigningKey: "{{.gpgSigningKey}}"
+    isXServer: {{.isXServer}}{{ else }}
+    # DEFAULT VALUES
+    # THIS COMMENT ALSO WILL NOT BE PRESERVED
+    gpgSigningKey: "AA3B4C1C2AF66662"
+    isXServer: true
+  {{ end }}

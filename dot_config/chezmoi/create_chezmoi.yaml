@@ -1,4 +1,0 @@
-mode: "symlink"
-data:
-  local:
-    gpgSigningKey: "AA3B4C1C2AF66662"
