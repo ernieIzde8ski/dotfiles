@@ -13,6 +13,7 @@ pyproject.toml
 
 {{ if not (lookPath "ghostwriter") }}
     .config/kde.org/ghostwriter.conf
+    .local/share/ghostwriter/
 {{ end }}
 
 {{ if not (lookPath "zsh") }}
@@ -22,4 +23,12 @@ pyproject.toml
     .bash_history
     .bash_logout
     .bashrc
+{{ end }}
+
+# configs that depend on chezmoi.yaml.tmpl
+{{ with index . "local" }}
+    {{ if not .isXServer }}
+        .config/kde.org/
+        .local/share/applications/
+    {{ end }}
 {{ end }}
