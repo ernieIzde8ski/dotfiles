@@ -1,34 +1,43 @@
 #!/bin/zsh
 
-# useful command--reset a git directory to a clean state
+# ----- Command Aliases
 alias gpristine='git reset --hard && git clean -dfx'
 
-# default variables
+
+# ----- Miscellaneous exports
+export GPG_TTY=$TTY         # fix "error: gpg failed to sign the data" in `git commit`
+export LESSCHARSET="utf-8"  # fix manual pages rendering apostrophes (and others) incorrectly
+alias ls="ls --color=auto"  # make `ls` usually emit color output
+
+
+# ----- $PATH & $PATH-like variables
 export WINEPREFIX="${WINEPREFIX:-$HOME/.cache/wine}"
-export NEWVOID="${NEWVOID:-/mnt/NEWVOID}"
+
+# rust package manager
 export CARGO_HOME="${CARGO_HOME:-$HOME/.local/share/cargo}"
 [[ -f "$CARGO_HOME/env" ]] && source "$CARGO_HOME/env"
-
-# updating $PATH to reflect my environment
 [[ -d "$CARGO_HOME/bin" ]] && PATH="$CARGO_HOME/bin:$PATH"
-mountpoint "$NEWVOID" &>/dev/null && PATH="$NEWVOID/Random/CEDev/bin:$PATH"
-gempath="/usr/lib/ruby/gems"
-for rbpath in $(ls -r "$gempath" 2>/dev/null); do
-    export PATH="$PATH:$gempath/$rbpath/bin"
-done
+
+# updating NEWVOID-related files, depending on if the mountpoint even
+# exists yet and if it's mounted at all
+if [[ ! -v NEWVOID && -d /mnt/NEWVOID ]]; then
+    export NEWVOID="/mnt/NEWVOID"
+    if mountpoint "$NEWVOID" &>/dev/null; then
+        PATH="$NEWVOID/Random/CEDev/bin:$PATH"
+    fi
+fi
+
+# prioritizing ~/.local/bin over everything
 PATH="$HOME/.local/bin:$PATH"
 export PATH
 
-# resolving technical issues
-export GPG_TTY="${GPG_TTY:-$(tty)}"
-export CLICOLOR=1
-export LESSCHARSET="utf-8" # fix man pages not displaying apostrophes
-alias ls="ls --color=auto"
+# appending the binaries of ruby gems
+for gem_bin in $(find -maxdepth 4 -name bin "/usr/lib/ruby/gems/" 2>/dev/null); do
+    export PATH="$PATH:$gem_bin"
+done
 
+# ----- $EDITOR
 editors=("micro" "nano" "vim")
 for editor in $editors; do
-    editor="$(command -v ${editor})" && {
-        export EDITOR=$editor
-        break
-    }
+    export EDITOR="$(command -v ${editor})" && break;
 done
