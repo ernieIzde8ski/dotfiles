@@ -7,8 +7,8 @@
     "rmtrailingws": true,
     "scrollbar": true,
     "scrollspeed": 1,
-    "softwrap": true,
-    "sucmd": "doas",
+    "softwrap": true,{{ if lookPath "doas" }}
+    "sucmd": "doas",{{ end }}
     "tabstospaces": true,
     "wordwrap": true
 }
