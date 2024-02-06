@@ -1,0 +1,17 @@
+#!/bin/sh
+
+set -e
+
+echo "Running this command will destroy any local changes, including in untracked files."
+echo "Are you ABSOLUTELY SURE you want to do this?"
+read -p "[y/N] " CONT
+
+# strip to first char
+CONT="${CONT%${CONT#?}}"
+
+if [ "$CONT" = "y" ] || [ "$CONT" = "Y" ]; then
+    git reset --hard
+    git clean -dfx
+else
+    exit 1
+fi

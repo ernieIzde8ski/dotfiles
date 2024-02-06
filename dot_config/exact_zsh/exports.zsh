@@ -1,17 +1,26 @@
 #!/bin/zsh
 
 # ----- Command Aliases
-alias gpristine='git reset --hard && git clean -dfx'
-alias git-graph="git log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all"
+alias ls="ls --color=auto"  # make `ls` usually emit color output
+
 
 # ----- Miscellaneous exports
 export GPG_TTY=$TTY         # fix "error: gpg failed to sign the data" in `git commit`
 export LESSCHARSET="utf-8"  # fix manual pages rendering apostrophes (and others) incorrectly
-alias ls="ls --color=auto"  # make `ls` usually emit color output
 
+if command -v manpath >/dev/null && [[ ! -v manpath_is_set ]]; then
+    # fix MANPATH not including ~/.local/share/man/
+    # not sure why it has to be stored in a separate variable,
+    # but this works
+    temp_manpath=$(manpath) 2>/dev/null
+    MANPATH=":$temp_manpath"
+    unset temp_manpath
+    export manpath_is_set=true
+fi
 
 # ----- $PATH & $PATH-like variables
 export WINEPREFIX="${WINEPREFIX:-$HOME/.cache/wine}"
+
 
 # rust package manager
 export CARGO_HOME="${CARGO_HOME:-$HOME/.local/share/cargo}"
