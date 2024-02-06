@@ -1,59 +1,43 @@
 #!/bin/zsh
 
-# colors, if the current terminal supports them
-if [[ $(tput colors 2>/dev/null) -ge 8 ]]; then
-  NORMAL="$(tput sgr0)"
-  RED="$(tput setaf 1)"
-  GREEN="$(tput setaf 2)"
-  YELLOW="$(tput setaf 3)"
-  BLUE="$(tput setaf 4)"
-  MAGENTA="$(tput setaf 5)"
-  CYAN="$(tput setaf 6)"
-  WHITE="$(tput setaf 7)"
-  GRAY="$(tput setaf 8)"
+# this code heavily relies on prompt expansion, as documented here:
+# https://zsh.sourceforge.io/Doc/Release/Prompt-Expansion.html#Prompt-Expansion
 
-  # makes sure command output is uncolored
-  function preexec {
-    echo -n $NORMAL
-  }
-fi
 
-function prompt_shlvl {
-    echo -n "$MAGENTA$SHLVL$NORMAL"
-}
+# make sure Python venvs don't override the prompt
+export VIRTUAL_ENV_DISABLE_PROMPT=1
+
 
 function prompt_exit_code {
   if [[ $? -eq 0 ]]; then
-    echo -n "$GREEN$?$NORMAL"
+    echo -n "%F{green}%?%f"
   else
-    echo -n "$RED$?$NORMAL"
+    echo -n "%F{red}%?%f"
   fi
 }
 
 function prompt_venv {
   if [[ -v VIRTUAL_ENV ]]; then
-    echo -n "$YELLOW(venv) $NORMAL"
+    echo -n "%F{yellow}(venv) %f"
   fi
 }
 
 function prompt_workstation {
   # printing out red for root, cyan for anyone else
   if [[ $UID -eq 0 ]]; then
-    PROMPT_COLOR_0="${CYAN}"
-    PROMPT_COLOR_1="${RED}"
+    c_main="%F{cyan}"
+    c_alt="%F{red}"
   else
-    PROMPT_COLOR_0="${BLUE}"
-    PROMPT_COLOR_1="${CYAN}"
+    c_main="%F{blue}"
+    c_alt="%F{cyan}"
   fi
 
-  echo -n "${PROMPT_COLOR_0}${USER}${PROMPT_COLOR_1}@"
-  echo -n "${PROMPT_COLOR_0}%m${PROMPT_COLOR_1}::"
-  echo -n "${PROMPT_COLOR_0}$(basename $PWD)${PROMPT_COLOR_1}%#${NORMAL}"
+  echo -n "${c_main}%n${c_alt}@"
+  echo -n "${c_main}%m${c_alt}::"
+  echo -n "${c_main}%1~${c_alt}%# %f"
 }
 
-# make sure Python venvs don't override the prompt
-export VIRTUAL_ENV_DISABLE_PROMPT=1
-
-# with this opt, we can delay evaluation using "\$(command)" syntax
+# with this option, we can delay evaluation using "\$(command)" syntax
 setopt prompt_subst
-PROMPT="[\$(prompt_shlvl) \$(prompt_exit_code)] \$(prompt_venv)$(prompt_workstation) "
+
+PROMPT="[%F{magenta}%L%f \$(prompt_exit_code)] \$(prompt_venv)$(prompt_workstation)"
