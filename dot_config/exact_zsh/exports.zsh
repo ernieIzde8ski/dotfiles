@@ -2,7 +2,7 @@
 
 # ----- Command Aliases
 alias gpristine='git reset --hard && git clean -dfx'
-
+alias git-graph="git log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all"
 
 # ----- Miscellaneous exports
 export GPG_TTY=$TTY         # fix "error: gpg failed to sign the data" in `git commit`
