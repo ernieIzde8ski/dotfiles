@@ -8,14 +8,8 @@ alias ls="ls --color=auto"  # make `ls` usually emit color output
 export GPG_TTY=$TTY         # fix "error: gpg failed to sign the data" in `git commit`
 export LESSCHARSET="utf-8"  # fix manual pages rendering apostrophes (and others) incorrectly
 
-if command -v manpath >/dev/null && [[ ! -v manpath_is_set ]]; then
-    # fix MANPATH not including ~/.local/share/man/
-    # not sure why it has to be stored in a separate variable,
-    # but this works
-    temp_manpath=$(manpath) 2>/dev/null
-    MANPATH=":$temp_manpath"
-    unset temp_manpath
-    export manpath_is_set=true
+if [[ ! "$MANPATH" =~ ":$HOME\\b" ]]; then
+    export MANPATH="$MANPATH:$HOME/.local/share/man"
 fi
 
 # ----- $PATH & $PATH-like variables
