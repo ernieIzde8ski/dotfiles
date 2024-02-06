@@ -18,7 +18,9 @@ if [[ $(tput colors 2>/dev/null) -ge 8 ]]; then
   }
 fi
 
-prompt_shlvl="$MAGENTA$SHLVL$NORMAL"
+function prompt_shlvl {
+    echo -n "$MAGENTA$SHLVL$NORMAL"
+}
 
 function prompt_exit_code {
   if [[ $? -eq 0 ]]; then
@@ -54,4 +56,4 @@ export VIRTUAL_ENV_DISABLE_PROMPT=1
 
 # with this opt, we can delay evaluation using "\$(command)" syntax
 setopt prompt_subst
-PROMPT="[${prompt_shlvl} \$(prompt_exit_code)] \$(prompt_venv)$(prompt_workstation) "
+PROMPT="[\$(prompt_shlvl) \$(prompt_exit_code)] \$(prompt_venv)$(prompt_workstation) "
