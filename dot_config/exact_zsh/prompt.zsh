@@ -37,12 +37,16 @@ function prompt_venv {
 function prompt_workstation {
   # printing out red for root, cyan for anyone else
   if [[ $UID -eq 0 ]]; then
-    echo -n $RED
+    PROMPT_COLOR_0="${CYAN}"
+    PROMPT_COLOR_1="${RED}"
   else
-    echo -n $CYAN
+    PROMPT_COLOR_0="${BLUE}"
+    PROMPT_COLOR_1="${CYAN}"
   fi
 
-  echo -n "$USER$BLUE@$CYAN%m$BLUE%#"
+  echo -n "${PROMPT_COLOR_0}${USER}${PROMPT_COLOR_1}@"
+  echo -n "${PROMPT_COLOR_0}%m${PROMPT_COLOR_1}::"
+  echo -n "${PROMPT_COLOR_0}$(basename $PWD)${PROMPT_COLOR_1}%#${NORMAL}"
 }
 
 # make sure Python venvs don't override the prompt
@@ -50,4 +54,4 @@ export VIRTUAL_ENV_DISABLE_PROMPT=1
 
 # with this opt, we can delay evaluation using "\$(command)" syntax
 setopt prompt_subst
-PROMPT="[${prompt_shlvl} \$(prompt_exit_code)] \$(prompt_venv)$(prompt_workstation) ${GRAY}"
+PROMPT="[${prompt_shlvl} \$(prompt_exit_code)] \$(prompt_venv)$(prompt_workstation) "
