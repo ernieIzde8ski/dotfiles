@@ -32,12 +32,13 @@ fi
 
 # prioritizing ~/.local/bin over everything
 PATH="$HOME/.local/bin:$PATH"
-export PATH
 
 # appending the binaries of ruby gems
 for gem_bin in $(find -maxdepth 4 -name bin "/usr/lib/ruby/gems/" 2>/dev/null); do
-    export PATH="$PATH:$gem_bin"
+    PATH="$PATH:$gem_bin"
 done
+
+export PATH
 
 # ----- $EDITOR
 editors=("micro" "nano" "vim")
