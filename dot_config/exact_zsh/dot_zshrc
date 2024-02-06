@@ -23,4 +23,6 @@ done
 
 if command -v thefuck > /dev/null; then
     eval $(thefuck --alias)
+    # for being in the vicinity of my parents
+    alias fix=fuck
 fi
