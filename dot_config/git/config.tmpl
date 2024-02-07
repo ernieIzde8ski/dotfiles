@@ -3,6 +3,18 @@
 	email      = 44341687+ernieIzde8ski@users.noreply.github.com
 	signingKey = "{{ .local.gpgSigningKey }}"
 
+{{- if lookPath "gh" }}
+
+[credential "https://github.com"]
+       helper =
+       helper = !/usr/bin/gh auth git-credential
+
+[credential "https://gist.github.com"]
+       helper =
+       helper = !/usr/bin/gh auth git-credential
+
+{{- end }}
+
 [commit]
 	gpgSign = true
 
