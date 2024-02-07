@@ -1,7 +1,13 @@
 [user]
-	name = Ernest Izdebski
-	email = 44341687+ernieIzde8ski@users.noreply.github.com
+	name       = Ernest Izdebski
+	email      = 44341687+ernieIzde8ski@users.noreply.github.com
 	signingKey = "{{ .local.gpgSigningKey }}"
 
 [commit]
 	gpgSign = true
+
+[init]
+    defaultBranch = master
+
+[push]
+    autoSetupRemote = true
