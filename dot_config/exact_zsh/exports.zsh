@@ -13,7 +13,7 @@ if [[ ! "$MANPATH" =~ ":$HOME\\b" ]]; then
 fi
 
 # ----- $PATH & $PATH-like variables
-export WINEPREFIX="${WINEPREFIX:-$HOME/.cache/wine}"
+export WINEPREFIX="${WINEPREFIX:-$HOME/.local/share/wine}"
 
 
 # rust package manager
