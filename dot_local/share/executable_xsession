@@ -1,0 +1,21 @@
+#!/bin/sh
+
+if command -v pipewire; then
+    # if these processes are already being used, it's ok,
+    # pipewire will stop automatically anyways
+    pipewire &
+    pipewire-pulse &
+    if command -v wireplumber; then
+        wireplumber &
+    fi
+fi
+
+if mountpoint -q /mnt/uvirith; then
+    if command -v nicotine; then
+        nicotine --hidden &
+    fi
+
+    if command -v clementine; then
+        clementine &
+    fi
+fi

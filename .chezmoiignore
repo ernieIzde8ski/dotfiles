@@ -30,8 +30,10 @@ pyproject.toml
 # configs that depend on chezmoi.yaml.tmpl
 {{ with index . "local" }}
     {{ if not .isXServer }}
+        .config/autostart/
         .config/kde.org/
         .local/share/applications/
+        .local/share/xsession
         .xinitrc
     {{ end }}
 {{ end }}
