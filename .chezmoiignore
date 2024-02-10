@@ -35,5 +35,6 @@ pyproject.toml
         .local/share/applications/
         .local/share/xsession
         .xinitrc
+        .config/spectaclerc
     {{ end }}
 {{ end }}
