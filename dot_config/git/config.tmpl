@@ -3,6 +3,17 @@
 	email      = 44341687+ernieIzde8ski@users.noreply.github.com
 	signingKey = "{{ .local.gpgSigningKey }}"
 
+[alias]
+    amend = "commit --amend"
+    graph = "log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all"
+    wd    = "diff --word-diff"
+
+[branch]
+    sort = -committerdate
+
+[commit]
+	gpgSign = true
+
 {{- if lookPath "gh" }}
 
 [credential "https://github.com"]
@@ -15,11 +26,11 @@
 
 {{- end }}
 
-[commit]
-	gpgSign = true
-
 [init]
     defaultBranch = master
 
 [push]
     autoSetupRemote = true
+
+[rerere]
+    enabled = true
