@@ -2,7 +2,9 @@
 
 # ----- Command Aliases
 alias ls="ls --color=auto"  # make `ls` usually emit color output
-
+if command -v perl-rename &>/dev/null; then
+    alias rename=perl-rename
+fi
 
 # ----- Miscellaneous exports
 export GPG_TTY=$TTY         # fix "error: gpg failed to sign the data" in `git commit`
@@ -17,6 +19,7 @@ export WINEPREFIX="${WINEPREFIX:-$HOME/.local/share/wine}"
 
 
 # rust package manager
+export RUSTUP_HOME="${RUSTUP_HOME:-$HOME/.local/share/rustup}"
 export CARGO_HOME="${CARGO_HOME:-$HOME/.local/share/cargo}"
 [[ -f "$CARGO_HOME/env" ]] && source "$CARGO_HOME/env"
 [[ -d "$CARGO_HOME/bin" ]] && PATH="$CARGO_HOME/bin:$PATH"
@@ -41,7 +44,7 @@ done
 export PATH
 
 # ----- $EDITOR
-editors=("micro" "nano" "vim")
+editors=("vim" "micro" "nano")
 for editor in $editors; do
     export EDITOR="$(command -v ${editor})" && break;
 done
