@@ -4,10 +4,8 @@ if command -v pipewire; then
     # if these processes are already being used, it's ok,
     # pipewire will stop automatically anyways
     pipewire &
-    pipewire-pulse &
-    if command -v wireplumber; then
-        wireplumber &
-    fi
+    # black magick: pipewire is VERY unhappy with spawning `pipewire-pulse` & `wireplumber` manually.
+    # May8e it does this already? I don't know.
 fi
 
 if mountpoint -q /mnt/uvirith; then
