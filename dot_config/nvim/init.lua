@@ -13,13 +13,20 @@ vim.cmd [[
 
 vim.call('plug#begin')
 
+Plug('andweeb/presence.nvim')
 Plug('neovim/nvim-lspconfig')
+Plug('tpope/vim-eunuch')
 
 vim.call('plug#end')
 
-------- plugin config
-local lspconfig = require('lspconfig')
 
+------- plugin config
+require("presence").setup({
+    neovim_image_text  = "get fucked lmao",
+    enable_line_number = true,
+})
+
+local lspconfig = require('lspconfig')
 lspconfig.pyright.setup{}
 
 ------- general
