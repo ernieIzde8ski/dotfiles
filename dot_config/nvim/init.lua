@@ -13,7 +13,10 @@ vim.cmd [[
 
 vim.call('plug#begin')
 
-Plug('andweeb/presence.nvim')
+if not vim.g.vscode then
+    Plug("IogaMaster/neocord")
+end
+
 Plug('neovim/nvim-lspconfig')
 Plug('tpope/vim-eunuch')
 
@@ -21,10 +24,13 @@ vim.call('plug#end')
 
 
 ------- plugin config
-require("presence").setup({
-    neovim_image_text  = "get fucked lmao",
-    enable_line_number = true,
-})
+if not vim.g.vscode then
+    require("neocord").setup({
+        logo_tooltip    = "You pissant little gnome.",
+        show_time       = true,
+        global_timer    = true,
+    })
+end
 
 local lspconfig = require('lspconfig')
 lspconfig.pyright.setup{}
