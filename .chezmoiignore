@@ -36,6 +36,7 @@ pyproject.toml
         .config/kde.org/
         .config/spectaclerc/
         .local/bin/update-vscode
+        .local/bin/update-discord
         .local/share/applications/
         .local/share/xsession
         .xinitrc

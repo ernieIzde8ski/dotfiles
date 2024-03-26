@@ -1,0 +1,15 @@
+#!/bin/sh
+
+set -e
+
+command -v xdistdir > /dev/null || { echo "xdistdir not found! install xtools"; exit 1; }
+
+XBPS_DISTDIR="$(xdistdir)"
+cd $XBPS_DISTDIR
+
+git switch master > /dev/null
+git pull
+
+./xbps-src binary-bootstrap
+./xbps-src pkg discord
+xi -u discord
