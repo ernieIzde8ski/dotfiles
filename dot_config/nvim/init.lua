@@ -2,20 +2,33 @@ local vim = vim
 local has = vim.fn["has"]
 
 ------- general
+---- netrw - list as a tree by default
 vim.g.netrw_liststyle = 3
 vim.g.netrw_list_hide = "\\(node_modules\\|venv\\|.git\\|__pycache__\\)/"
 
+---- line display
 vim.opt.number = true
+vim.opt.relativenumber = true
+vim.opt.cursorline = true
+-- no `signcolumn=number`: conflicts with gitsigns plugin
 
-vim.api.nvim_create_user_command("Black", "w | !black %", {})
+---- display tabs & trailing whitespace
+vim.opt.list = true
+vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
+
+---- 4-space-width tabs
+vim.opt.expandtab   = true
+vim.opt.softtabstop = 4
+vim.opt.tabstop     = 4
+vim.opt.shiftwidth  = 0
+
+---- misc
+vim.opt.clipboard  = "unnamedplus"
+vim.opt.scrolloff  = 5
+vim.opt.splitbelow = true
 
 vim.keymap.set("n", "<F5>", "<cmd>up<cr>")
-
--- 4-space-width tabs
-vim.opt.expandtab = true
-vim.opt.softtabstop = 4
-vim.opt.tabstop = 4
-vim.opt.shiftwidth = 0
+vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
 ------- vim-plug
 local Plug = vim.fn["plug#"]
@@ -28,12 +41,16 @@ vim.cmd([[
     \| endif
 ]])
 
+
 vim.call("plug#begin")
 
 if not vim.g.vscode then
-	Plug("IogaMaster/neocord")
-	Plug("nvim-treesitter/nvim-treesitter", { ["do"] = ":TSUpdate" })
-	Plug("mhartington/oceanic-next")
+    Plug("IogaMaster/neocord")
+    Plug("lewis6991/gitsigns.nvim")
+    Plug("mhartington/oceanic-next")
+    Plug("nvim-treesitter/nvim-treesitter", { ["do"] = ":TSUpdate" })
+    Plug("tpope/vim-fugitive")
+    Plug("tpope/vim-rhubarb")
 end
 
 Plug("neovim/nvim-lspconfig")
@@ -43,25 +60,39 @@ vim.call("plug#end")
 
 ------- plugin config
 if not vim.g.vscode then
-	require("neocord").setup({
-		logo_tooltip = "You pissant little gnome.",
-		show_time = true,
-		global_timer = true,
-	})
+    pcall(require("neocord").setup, {
+        logo_tooltip = "You pissant little gnome.",
+        show_time = true,
+        global_timer = true,
+    })
 
-	require("nvim-treesitter.configs").setup({
-		-- the languages that I tend to work with
-		ensure_installed = { "python", "rust", "markdown", "lua", "typescript", "javascript" },
-	})
+    require("gitsigns").setup({
+        attach_to_untracked = true,
+        current_line_blame  = true,
+    })
 
-	if has("termguicolors") then
-		vim.o.termguicolors = true
-	end
+    if has("termguicolors") then
+        vim.o.termguicolors = true
+    end
 
-	vim.cmd([[
-    	syntax enable
+    vim.cmd([[
+        syntax enable
         colorscheme OceanicNext
     ]])
+
+    require("nvim-treesitter.configs").setup({
+        -- the languages that I tend to work with
+        ensure_installed = {
+            "javascript",
+            "lua",
+            "markdown",
+            "python",
+            "rust",
+            "toml",
+            "typescript",
+            "yaml",
+        },
+    })
 end
 
 local lspconfig = require("lspconfig")
