@@ -7,7 +7,7 @@ from pathlib import Path
 from typing import Iterable
 
 try:  # optional ansicolors dependency
-    from colors import red, blue
+    from colors import blue, red
 except ImportError:
     print("ansicolors not installed, defaulting to no color output")
 

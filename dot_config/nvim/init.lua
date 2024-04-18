@@ -17,14 +17,14 @@ vim.opt.list = true
 vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 
 ---- 4-space-width tabs
-vim.opt.expandtab   = true
+vim.opt.expandtab = true
 vim.opt.softtabstop = 4
-vim.opt.tabstop     = 4
-vim.opt.shiftwidth  = 0
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 0
 
 ---- misc
-vim.opt.clipboard  = "unnamedplus"
-vim.opt.scrolloff  = 5
+vim.opt.clipboard = "unnamedplus"
+vim.opt.scrolloff = 5
 vim.opt.splitbelow = true
 
 vim.keymap.set("n", "<F5>", "<cmd>up<cr>")
@@ -40,7 +40,6 @@ vim.cmd([[
         \| PlugInstall --sync | source $MYVIMRC
     \| endif
 ]])
-
 
 vim.call("plug#begin")
 
@@ -68,7 +67,7 @@ if not vim.g.vscode then
 
     require("gitsigns").setup({
         attach_to_untracked = true,
-        current_line_blame  = true,
+        current_line_blame = true,
     })
 
     if has("termguicolors") then

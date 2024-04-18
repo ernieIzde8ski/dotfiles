@@ -8,20 +8,25 @@ from pathlib import Path
 if getpass.getuser() != "root":
     raise RuntimeError("program must be run as root!")
 
-parser = argparse.ArgumentParser(description="Tests matched configurations in /etc/wireguard for configuration with highest speed.")
+parser = argparse.ArgumentParser(
+    description="Tests matched configurations in /etc/wireguard for configuration with highest speed."
+)
 parser.add_argument("glob", type=str, help="files to match")
 parser.add_argument("--hostname", type=str, default="9.9.9.9", help="host to ping")
 parser.add_argument("--pings", type=int, default=5, help="times --hostname is pinged")
 parser.add_argument("--debug", type=bool, default=False, help="display executed commands")
-clargs  = parser.parse_args()
+clargs = parser.parse_args()
+
 
 class SubprocessError(RuntimeError):
     code: int
     stderr: str
+
     def __init__(self, code: int, stderr: str, *args: object) -> None:
         super().__init__(f"Process failed with exit code {code}", *args)
         self.code = code
         self.stderr = stderr
+
 
 def run(*args: str, encoding="utf-8") -> str:
     if clargs.debug:
@@ -32,7 +37,8 @@ def run(*args: str, encoding="utf-8") -> str:
     text = proc.stderr.decode(encoding).strip()
     raise SubprocessError(proc.returncode, text)
 
-def ping(count = str(clargs.pings), host = clargs.hostname):
+
+def ping(count=str(clargs.pings), host=clargs.hostname):
     try:
         output = run("ping", "-c", count, host)
         # on my computer, the trailing output is min/avg/max/mdev
@@ -41,6 +47,7 @@ def ping(count = str(clargs.pings), host = clargs.hostname):
         return float(nums[1])
     except:
         return -1.0
+
 
 rates: list[tuple[str, float]] = []
 
@@ -70,4 +77,6 @@ finally:
         lowest_rate = min(rates, key=key)
         rates.sort(key=key)
         print("All rates:\n", *rates, sep="\t")
-        print("Lowest rate:\t", lowest_rate[0], "with an average of", lowest_rate[1], "ms")
+        print(
+            "Lowest rate:\t", lowest_rate[0], "with an average of", lowest_rate[1], "ms"
+        )
