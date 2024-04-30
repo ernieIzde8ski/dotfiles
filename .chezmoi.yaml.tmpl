@@ -1,0 +1,8 @@
+{{ $isXServer := promptBoolOnce . "isXServer" "Is this machine running an X11 server? [Y/n]" true -}}
+{{ $gpgSigningKey := promptStringOnce . "gpgSigningKey" "GPG signing key: "
+    "5C9DBF62D9602C233202F06A24E767FED21795D5" -}}
+
+mode: "symlink"
+data:
+    gpgSigningKey: {{ $gpgSigningKey | quote}}
+    isXServer: {{ $isXServer }}

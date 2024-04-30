@@ -28,17 +28,13 @@ pyproject.toml
 {{ end }}
 
 # --- Chezmoi.yaml-dependent bindings
-# these bindings depend on chezmoi.yaml to have keys
-# already defined - in particular, the isXServer key
-{{ with index . "local" }}
-    {{ if not .isXServer }}
-        .config/autostart/
-        .config/kde.org/
-        .config/spectaclerc/
-        .local/bin/update-vscode
-        .local/bin/update-discord
-        .local/share/applications/
-        .local/share/xsession
-        .xinitrc
-    {{ end }}
+{{ if not .isXServer }}
+    .config/autostart/
+    .config/kde.org/
+    .config/spectaclerc/
+    .local/bin/update-vscode
+    .local/bin/update-discord
+    .local/share/applications/
+    .local/share/xsession
+    .xinitrc
 {{ end }}
