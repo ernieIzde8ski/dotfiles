@@ -8,15 +8,8 @@ pyproject.toml
 .config/zsh/.zcompdump
 
 
-# --- Program-specific bindings
-# These configs are disabled when their respective programs are not
-# installed. I did this mainly to make my dotfiles less cluttered,
-# so it's not a real concern if not all programs have entries.
+# --- misc program-specific bindings
 
-{{ if not (lookPath "ghostwriter") }}
-    .config/kde.org/ghostwriter.conf
-    .local/share/ghostwriter/
-{{ end }}
 
 {{ if not (lookPath "zsh") }}
     .zshrc
@@ -27,8 +20,10 @@ pyproject.toml
     .bashrc
 {{ end }}
 
-# --- Chezmoi.yaml-dependent bindings
+
+# --- xserver-dependent bindings
 {{ if not .isXServer }}
+    # all GUI-based stuff
     .config/autostart/
     .config/kde.org/
     .config/spectaclerc/
@@ -37,4 +32,17 @@ pyproject.toml
     .local/share/applications/
     .local/share/xsession
     .xinitrc
+{{ else }}
+    {{ if not (lookPath "ghostwriter") }}
+        .config/kde.org/ghostwriter.conf
+        .local/share/ghostwriter/
+    {{ end }}
+
+    {{ if not (stat "/opt/Pesterchum") }}
+        .local/share/applications/pesterchum.desktop
+    {{ end }}
+
+    {{ if not (stat "/mnt/indarys") }}
+        .local/share/applications/flashpoint.desktop
+    {{ end }}
 {{ end }}

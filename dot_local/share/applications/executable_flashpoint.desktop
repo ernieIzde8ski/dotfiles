@@ -1,0 +1,10 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Categories=Game;
+Comment=Launcher for Flashpoint Archive, the non-profit web preservation project.
+Exec=/mnt/indarys/games/Flashpoint/start-flashpoint.sh
+Icon=/mnt/indarys/games/Flashpoint/Data/Logos/Flash.png
+Name=Flashpoint Launcher
+Path=/mnt/indarys/games/Flashpoint/
+Terminal=false
+Type=Application

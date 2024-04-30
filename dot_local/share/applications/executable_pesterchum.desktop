@@ -1,0 +1,17 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Categories=Network;InstantMessaging;
+Comment=IRC if it was cool
+Exec=/opt/Pesterchum/Pesterchum
+GenericName=Internet Messenger
+Icon=/opt/Pesterchum/themes/pesterchum2.5/insolent.png
+MimeType=
+Name=Pesterchum
+Path=/opt/Pesterchum/
+StartupNotify=true
+StartupWMClass=Pesterchum
+Terminal=false
+TerminalOptions=
+Type=Application
+X-KDE-SubstituteUID=false
+X-KDE-Username=
