@@ -27,8 +27,9 @@ vim.opt.clipboard = "unnamedplus"
 vim.opt.scrolloff = 5
 vim.opt.splitbelow = true
 
-vim.keymap.set("n", "<F5>", "<cmd>up<cr>")
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
+vim.keymap.set("n", "<F5>", "<cmd>up<cr>")
+vim.keymap.set("n", "<F6>", "<cmd>!%:p<cr>")
 
 ------- vim-plug
 local Plug = vim.fn["plug#"]
@@ -94,6 +95,34 @@ if not vim.g.vscode then
     })
 end
 
+-- lspconfig setup
 local lspconfig = require("lspconfig")
+lspconfig.hls.setup({ filetypes = { "haskell", "lhaskell", "cabal" } })
 lspconfig.pyright.setup({})
 lspconfig.tsserver.setup({})
+
+vim.api.nvim_create_autocmd("LspAttach", {
+    callback = function(args)
+        local keymaps = {
+            ["<F2>"] = "rename",
+            ["K"] = "hover",
+            ["g<C-d>"] = "type_definition",
+            ["gD"] = "declaration",
+            ["gd"] = "definition",
+            ["gr"] = "references",
+        }
+
+        local bufnr = args.buf
+        local opts = { noremap = true, silent = true }
+
+        for lhs, rhs in pairs(keymaps) do
+            vim.api.nvim_buf_set_keymap(
+                bufnr,
+                "n",
+                lhs,
+                "<cmd>lua vim.lsp.buf." .. rhs .. "()<CR>",
+                opts
+            )
+        end
+    end,
+})

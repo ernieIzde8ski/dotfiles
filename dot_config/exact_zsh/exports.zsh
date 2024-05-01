@@ -7,8 +7,10 @@ if command -v perl-rename &>/dev/null; then
 fi
 
 # ----- Miscellaneous exports
-export GPG_TTY=$TTY         # fix "error: gpg failed to sign the data" in `git commit`
-export LESSCHARSET="utf-8"  # fix manual pages rendering apostrophes (and others) incorrectly
+export CABAL_DIR="$HOME/.local/share/cabal" # move cabal stuff out of $HOME
+export GHCUP_USE_XDG_DIRS=true  # move ghcup stuff out of ~/.ghcup
+export GPG_TTY=$TTY             # fix "error: gpg failed to sign the data" in `git commit`
+export LESSCHARSET="utf-8"      # fix manual pages rendering some chars incorrectly
 
 if [[ ! "$MANPATH" =~ ":$HOME\\b" ]]; then
     export MANPATH="$MANPATH:$HOME/.local/share/man"
