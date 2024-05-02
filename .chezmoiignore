@@ -11,9 +11,19 @@ pyproject.toml
 # --- misc program-specific bindings
 
 
+{{ if not (lookPath "micro") }}
+    .config/micro/
+{{ end }}
+
+{{ if not (lookPath "wg-quick") }}
+    .local/bin/wg-random.py
+    .local/bin/wg-speedtest.py
+{{ end }}
+
 {{ if not (lookPath "zsh") }}
     .zshrc
     .config/zsh/
+    .local/share/zsh/
     # in a move of Ultimate Pettiness, I delete bash configs whenever zsh is installed
     .bash_history
     .bash_logout
@@ -30,6 +40,7 @@ pyproject.toml
     .local/bin/update-vscode
     .local/bin/update-discord
     .local/share/applications/
+    .local/share/ghostwriter/
     .local/share/xsession
     .xinitrc
 {{ else }}

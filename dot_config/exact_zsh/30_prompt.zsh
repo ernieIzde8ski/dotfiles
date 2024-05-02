@@ -3,7 +3,6 @@
 # this code heavily relies on prompt expansion, as documented here:
 # https://zsh.sourceforge.io/Doc/Release/Prompt-Expansion.html#Prompt-Expansion
 
-
 # make sure Python venvs don't override the prompt
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 
