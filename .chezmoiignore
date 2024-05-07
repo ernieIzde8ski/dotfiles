@@ -35,6 +35,7 @@ pyproject.toml
 {{ if or (eq .chezmoi.uid "0") (not .isXServer)}}
     # all GUI-based stuff
     .config/autostart/
+    .config/discord/
     .config/kde.org/
     .config/spectaclerc/
     .local/bin/update-vscode
@@ -44,6 +45,10 @@ pyproject.toml
     .local/share/xsession
     .xinitrc
 {{ else }}
+    {{ if not (lookPath "Discord") }}
+        .config/discord/
+    {{ end }}
+
     {{ if not (lookPath "ghostwriter") }}
         .config/kde.org/ghostwriter.conf
         .local/share/ghostwriter/
