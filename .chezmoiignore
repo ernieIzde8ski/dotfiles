@@ -32,7 +32,7 @@ pyproject.toml
 
 
 # --- xserver-dependent bindings
-{{ if not .isXServer }}
+{{ if or (eq .chezmoi.uid "0") (not .isXServer)}}
     # all GUI-based stuff
     .config/autostart/
     .config/kde.org/
