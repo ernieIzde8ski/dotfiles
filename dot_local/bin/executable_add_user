@@ -1,0 +1,15 @@
+#!/bin/sh
+set -e
+
+if [ $# -eq 0 ]; then
+    echo 'usage: ' $0 ' username[...]' 1>&2
+    exit 1
+fi
+
+groups=audio,video,floppy,cdrom,optical,kvm,xbuilder
+
+for username in "$@"; do
+    echo "adding user '$username' with groups: $groups"
+    useradd -G "$groups" "$username"
+    passwd "$username"
+done
