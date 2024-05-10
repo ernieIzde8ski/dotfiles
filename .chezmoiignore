@@ -53,6 +53,10 @@ pyproject.toml
         .local/share/ghostwriter/
     {{ end }}
 
+    {{ if not (and (lookPath "pipewire-pulse") (lookPath "wireplumber")) }}
+        .config/pipewire/
+    {{ end }}
+
     {{ if not (stat "/opt/Pesterchum") }}
         .local/share/applications/pesterchum.desktop
     {{ end }}
@@ -66,6 +70,7 @@ pyproject.toml
     .config/discord/
     .config/kde.org/
     .config/spectaclerc/
+    .config/pipewire/
     .local/bin/update-vscode
     .local/bin/update-discord
     .local/share/applications/
