@@ -3,6 +3,7 @@
 {{ $gpgSigningKey := "5C9DBF62D9602C233202F06A24E767FED21795D5" -}}
 {{ $gpgSigningKey := promptStringOnce . "gpgSigningKey" "GPG signing key: " $gpgSigningKey -}}
 
+{{ $isWork := promptBoolOnce . "isWork" "Is this a work user? " false -}}
 
 # the following lines were automatically written by a little old lady from Leningrad
 # she'll appreciate it if you run `chezmoi cd` and edit `.chezmoi.yaml.tmpl`
@@ -15,3 +16,4 @@ mode: "symlink"
 data:
     gpgSigningKey: {{ $gpgSigningKey | quote}}
     isXServer: {{ $isXServer }}
+    isWork: {{ $isWork }}

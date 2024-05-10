@@ -9,16 +9,16 @@ pyproject.toml
 
 
 # --- misc program-specific bindings
-
-
 {{ if not (lookPath "micro") }}
     .config/micro/
 {{ end }}
+
 
 {{ if not (lookPath "wg-quick") }}
     .local/bin/wg-random.py
     .local/bin/wg-speedtest.py
 {{ end }}
+
 
 {{ if not (lookPath "zsh") }}
     .zshrc
@@ -42,6 +42,10 @@ pyproject.toml
 {{ if and $isNotRoot .isXServer }}
     {{ if not (lookPath "Discord") }}
         .config/discord/
+    {{ end }}
+
+    {{ if not (lookPath "code") }}
+        .local/share/applications/visual-studio-code*
     {{ end }}
 
     {{ if not (lookPath "ghostwriter") }}
