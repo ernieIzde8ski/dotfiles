@@ -1,6 +1,7 @@
 -- netrw - list as a tree by default
 vim.g.netrw_liststyle = 3
 vim.g.netrw_list_hide = "\\(node_modules\\|venv\\|.git\\|__pycache__\\)/"
+vim.g.netrw_bufsettings = "noma nomod nu rnu nobl nowrap ro"
 
 -- line display
 vim.opt.number = true
@@ -17,8 +18,10 @@ vim.opt.softtabstop = 4
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 0
 
+-- inlay hints
+vim.lsp.inlay_hint.enable()
+
 -- misc
-vim.opt.clipboard = "unnamedplus"
 vim.opt.scrolloff = 5
 vim.opt.splitbelow = true
 

@@ -1,0 +1,8 @@
+local opts = {
+    discord_available = os.execute("test -S $XDG_RUNTIME_DIR/discord-ipc-0") == 0,
+    lightTheme = {{ .isWork }},
+}
+
+require("settings")
+require("plug-install").setup(opts)
+require("plug-configure").setup(opts)
