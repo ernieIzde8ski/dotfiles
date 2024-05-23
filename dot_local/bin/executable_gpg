@@ -1,6 +1,6 @@
 #!/bin/sh
 
-if [ -n "$FUGITIVE" ]; then
+if [ -n "$FUGITIVE" ] || [ -n "$CHEZMOI_SUBSHELL" ]; then
   set -- --pinentry-mode loopback "$@"
 fi
 
