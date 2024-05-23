@@ -1,0 +1,11 @@
+Host azura
+  HostName 192.168.1.112
+  User ernie
+  IdentityFile ~/.ssh/id_azura
+  IdentitiesOnly yes
+
+Host *
+  # requires one of the two settings on the server:
+  #   AcceptEnv SHLVL
+  #   PermitUserEnvironment yes
+  SendEnv SHLVL

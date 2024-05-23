@@ -32,19 +32,14 @@ pyproject.toml
 
 
 # --- xserver-dependent bindings
-{{ if or (eq .chezmoi.uid "0") (not .isXServer)}}
-    # all GUI-based stuff
-    .config/autostart/
-    .config/discord/
-    .config/kde.org/
-    .config/spectaclerc/
-    .local/bin/update-vscode
-    .local/bin/update-discord
-    .local/share/applications/
-    .local/share/ghostwriter/
-    .local/share/xsession
-    .xinitrc
-{{ else }}
+{{ $isNotRoot := eq .chezmoi.uid "0" | not }}
+
+{{ if .isXServer }}
+    # *only* remote servers should have this
+    .ssh/authorized_keys
+{{ end }}
+
+{{ if and $isNotRoot .isXServer }}
     {{ if not (lookPath "Discord") }}
         .config/discord/
     {{ end }}
@@ -61,4 +56,18 @@ pyproject.toml
     {{ if not (stat "/mnt/indarys") }}
         .local/share/applications/flashpoint.desktop
     {{ end }}
+{{ else }}
+    # all GUI-based stuff
+    .config/autostart/
+    .config/discord/
+    .config/kde.org/
+    .config/spectaclerc/
+    .local/bin/update-vscode
+    .local/bin/update-discord
+    .local/share/applications/
+    .local/share/ghostwriter/
+    .local/share/xsession
+    .ssh/config
+    .ssh/id_*
+    .xinitrc
 {{ end }}

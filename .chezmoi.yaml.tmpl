@@ -8,6 +8,9 @@
 # she'll appreciate it if you run `chezmoi cd` and edit `.chezmoi.yaml.tmpl`
 # but she's not fond of `chezmoi edit ~/.config/chezmoi.yaml`
 
+encryption: "gpg"
+gpg:
+    recipient: "5C9DBF62D9602C233202F06A24E767FED21795D5"
 mode: "symlink"
 data:
     gpgSigningKey: {{ $gpgSigningKey | quote}}
