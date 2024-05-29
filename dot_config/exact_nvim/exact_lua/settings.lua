@@ -18,10 +18,8 @@ vim.opt.softtabstop = 4
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 0
 
--- inlay hints
-vim.lsp.inlay_hint.enable()
-
 -- misc
+vim.lsp.inlay_hint.enable()
 vim.opt.scrolloff = 5
 vim.opt.splitbelow = true
 
@@ -38,7 +36,8 @@ vim.filetype.add({
 vim.keymap.set("n", "<C-B>", "Bi")
 vim.keymap.set("n", "<C-W>d", "<cmd>lua vim.diagnostic.open_float()<cr>")
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<cr>")
-vim.keymap.set("n", "<F5>", "<cmd>up<cr>")
-vim.keymap.set("n", "<F6>", "<cmd>!%:p<cr>")
+vim.keymap.set("n", "<F4>", "<cmd>update | Explore<cr>")
+vim.keymap.set("n", "<F5>", "<cmd>update<cr>")
+vim.keymap.set("n", "<F6>", "<cmd>!%:p<cr>") -- execute current file
 vim.keymap.set("n", "[d", "<cmd>lua vim.diagnostic.goto_prev()<cr>")
 vim.keymap.set("n", "]d", "<cmd>lua vim.diagnostic.goto_next()<cr>")

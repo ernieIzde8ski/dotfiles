@@ -1,8 +1,11 @@
-local opts = {
-    discord_available = os.execute("test -S $XDG_RUNTIME_DIR/discord-ipc-0") == 0,
-    lightTheme = {{ .isWork }},
-}
+{{ if .isWork -}}
+    vim.o.background = "light"
+{{ else -}}
+    vim.o.background = "dark"
+{{ end -}}
+
+vim.g.discord_available = os.execute("test -S $XDG_RUNTIME_DIR/discord-ipc-0") == 0
 
 require("settings")
-require("plug-install").setup(opts)
-require("plug-configure").setup(opts)
+require("plug-install")
+require("plug-configure")

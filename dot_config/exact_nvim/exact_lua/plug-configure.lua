@@ -113,7 +113,7 @@ local function setup_lspconfig()
     })
 end
 
-local function setup_display(lightTheme)
+local function setup_display()
     require("nvim-treesitter.configs").setup({
         ensure_installed = {
             "gotmpl",
@@ -130,18 +130,12 @@ local function setup_display(lightTheme)
         indent = { enable = true },
     })
 
-    if lightTheme then
-        vim.cmd("colorscheme kanagawa")
-    else
-        if has("termguicolors") then
-            vim.o.termguicolors = true
-        end
-
-        vim.cmd([[
-        syntax enable
-        colorscheme OceanicNext
-    ]])
+    if has("termguicolors") then
+        vim.o.termguicolors = true
     end
+
+    vim.cmd("syntax enable")
+    vim.cmd("colorscheme kanagawa")
 
     -- making floating displays have a border
     local float_border = { border = "single" }
@@ -157,7 +151,7 @@ local function setup_display(lightTheme)
     })
 end
 
-local function setup(opts)
+local function setup()
     setup_completions()
     setup_lspconfig()
 
@@ -166,9 +160,9 @@ local function setup(opts)
         current_line_blame = true,
     })
 
-    setup_display(opts.lightTheme)
+    setup_display()
 
-    if opts.discord_available then
+    if vim.g.discord_available then
         require("neocord").setup({
             logo_tooltip = "You pissant little gnome.",
             show_time = true,
@@ -177,4 +171,4 @@ local function setup(opts)
     end
 end
 
-return { setup = setup }
+setup()
