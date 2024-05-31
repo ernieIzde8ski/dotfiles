@@ -48,6 +48,10 @@ pyproject.toml
         .local/share/applications/visual-studio-code*
     {{ end }}
 
+    {{ if not (lookPath "konsole") }}
+        .local/share/konsole/
+    {{ end }}
+
     {{ if not (lookPath "ghostwriter") }}
         .config/kde.org/ghostwriter.conf
         .local/share/ghostwriter/
@@ -75,6 +79,7 @@ pyproject.toml
     .local/bin/update-discord
     .local/share/applications/
     .local/share/ghostwriter/
+    .local/share/konsole/
     .local/share/xsession
     .ssh/config
     .ssh/id_*
