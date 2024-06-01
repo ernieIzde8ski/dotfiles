@@ -33,6 +33,7 @@ Plug("rebelot/kanagawa.nvim")
 
 -- misc
 Plug("tpope/vim-eunuch")
+Plug("klen/nvim-config-local")
 
 if vim.g.discord_available then
     Plug("IogaMaster/neocord")

@@ -160,6 +160,8 @@ local function setup()
         current_line_blame = true,
     })
 
+    require("config-local").setup({ lookup_parents = true })
+
     setup_display()
 
     if vim.g.discord_available then

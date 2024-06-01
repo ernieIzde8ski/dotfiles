@@ -36,7 +36,7 @@ vim.filetype.add({
 vim.keymap.set("n", "<C-B>", "Bi")
 vim.keymap.set("n", "<C-W>d", "<cmd>lua vim.diagnostic.open_float()<cr>")
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<cr>")
-vim.keymap.set("n", "<F4>", "<cmd>update | Explore<cr>")
+vim.keymap.set("n", "<F3>", "<cmd>Explore<cr>")
 vim.keymap.set("n", "<F5>", "<cmd>update<cr>")
 vim.keymap.set("n", "<F6>", "<cmd>!%:p<cr>") -- execute current file
 vim.keymap.set("n", "[d", "<cmd>lua vim.diagnostic.goto_prev()<cr>")
