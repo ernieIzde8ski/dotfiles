@@ -18,8 +18,6 @@ Plug("hrsh7th/cmp-buffer")
 Plug("hrsh7th/cmp-path")
 Plug("hrsh7th/cmp-cmdline")
 Plug("petertriho/cmp-git")
-Plug("dcampos/nvim-snippy") -- todo: see if "native neovim snippets" are a good idea
-Plug("dcampos/cmp-snippy") -- when I get the update (Neovim v0.10+)
 Plug("hrsh7th/nvim-cmp")
 
 -- git

@@ -3,7 +3,6 @@ local has = vim.fn["has"]
 local function setup_completions()
     local cmp = require("cmp")
     local cmp_git = require("cmp_git")
-    local snippy = require("snippy")
 
     -- setup for nvim-cmp
     local source_buffer = { { name = "buffer" } }
@@ -11,7 +10,7 @@ local function setup_completions()
     cmp.setup({
         snippet = {
             expand = function(args)
-                snippy.expand_snippet(args.body)
+                vim.snippet.expand(args.body)
             end,
         },
         window = {
@@ -23,12 +22,9 @@ local function setup_completions()
             ["<C-f>"] = cmp.mapping.scroll_docs(4),
             ["<C-Space>"] = cmp.mapping.complete(),
             ["<C-e>"] = cmp.mapping.abort(),
-            ["<CR>"] = cmp.mapping.confirm({ select = true }),
+            ["<Tab>"] = cmp.mapping.confirm({ select = true }),
         }),
-        sources = cmp.config.sources(
-            { { name = "nvim_lsp" }, { name = "snippy" } },
-            source_buffer
-        ),
+        sources = cmp.config.sources({ { name = "nvim_lsp" } }, source_buffer),
     })
 
     cmp.setup.filetype("gitcommit", {
