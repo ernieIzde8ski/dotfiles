@@ -64,6 +64,10 @@ local function setup_lspconfig()
     lspconfig.rust_analyzer.setup({})
     lspconfig.pyright.setup(default_opts)
     lspconfig.tsserver.setup(default_opts)
+    lspconfig.typst_lsp.setup({
+        capabilities = capabilities,
+        settings = { exportPdf = "onSave" },
+    })
 
     lspconfig.lua_ls.setup({
         capabilities = capabilities,
