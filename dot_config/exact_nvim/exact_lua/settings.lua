@@ -33,6 +33,8 @@ vim.filetype.add({
     },
 })
 
+-- close other buffers
+vim.keymap.set({ "n", "v" }, "<Leader>bd", "mc<cmd>wall | %bd | e# | bd#<cr>`c")
 vim.keymap.set("n", "<C-B>", "Bi")
 vim.keymap.set("n", "<C-W>d", "<cmd>lua vim.diagnostic.open_float()<cr>")
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<cr>")
