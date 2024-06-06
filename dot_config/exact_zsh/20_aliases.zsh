@@ -10,10 +10,20 @@ fi
 
 function cdas {
     if [[ "$#" -eq 0 ]]; then
-        pushd; doas $SHELL; popd
+        pushd &>/dev/null; doas $SHELL; popd &>/dev/null
     else
         for argument in $@; do
             pushd $argument; doas $SHELL; popd
+        done
+    fi
+}
+
+function edas {
+    if [[ "$#" -eq 0 ]]; then
+        pushd &>/dev/null; $EDITOR .; popd &>/dev/null
+    else
+        for argument in $@; do
+            pushd $argument; $EDITOR .; popd
         done
     fi
 }
