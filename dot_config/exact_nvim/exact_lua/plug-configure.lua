@@ -1,5 +1,16 @@
 local has = vim.fn["has"]
 
+local lsp_keymaps = {
+    ["<Leader>a"] = "code_action",
+    ["<Leader>f"] = "format",
+    ["<F2>"] = "rename",
+    ["K"] = "hover",
+    ["g<C-d>"] = "type_definition",
+    ["gD"] = "declaration",
+    ["gd"] = "definition",
+    ["gr"] = "references",
+}
+
 local function setup_completions()
     local cmp = require("cmp")
     local cmp_git = require("cmp_git")
@@ -37,6 +48,7 @@ local function setup_completions()
         mapping = cmp.mapping.preset.cmdline(),
         sources = source_buffer,
     })
+
     cmp.setup.cmdline(":", {
         mapping = cmp.mapping.preset.cmdline(),
         sources = cmp.config.sources({
@@ -61,7 +73,20 @@ local function setup_lspconfig()
         capabilities = capabilities,
         filetypes = { "haskell", "lhaskell", "cabal" },
     })
-    lspconfig.rust_analyzer.setup({})
+    lspconfig.rust_analyzer.setup({
+        settings = {
+            ["rust-analyzer"] = {
+                imports = {
+                    granularity = { group = "module" },
+                    prefix = "self",
+                },
+                cargo = {
+                    buildScripts = { enable = true },
+                },
+                procMacro = { enable = true },
+            },
+        },
+    })
     lspconfig.pyright.setup(default_opts)
     lspconfig.tsserver.setup(default_opts)
     lspconfig.typst_lsp.setup({
@@ -87,20 +112,10 @@ local function setup_lspconfig()
     -- attaching keymaps, floating displays alongside the lsp
     vim.api.nvim_create_autocmd("LspAttach", {
         callback = function(args)
-            local keymaps = {
-                ["<Leader>f"] = "format",
-                ["<F2>"] = "rename",
-                ["K"] = "hover",
-                ["g<C-d>"] = "type_definition",
-                ["gD"] = "declaration",
-                ["gd"] = "definition",
-                ["gr"] = "references",
-            }
-
             local bufnr = args.buf
             local keymap_opts = { noremap = true, silent = true }
 
-            for lhs, rhs in pairs(keymaps) do
+            for lhs, rhs in pairs(lsp_keymaps) do
                 vim.api.nvim_buf_set_keymap(
                     bufnr,
                     "n",

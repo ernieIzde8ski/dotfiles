@@ -9,6 +9,7 @@ vim.cmd([[
 ]])
 
 vim.call("plug#begin")
+
 Plug("nvim-lua/plenary.nvim")
 
 -- lsp
