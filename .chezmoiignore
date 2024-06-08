@@ -13,6 +13,10 @@ pyproject.toml
     .config/micro/
 {{ end }}
 
+{{ if not (lookPath "npm") }}
+    .npmrc
+{{ end }}
+
 
 {{ if not (lookPath "wg-quick") }}
     .local/bin/wg-random.py

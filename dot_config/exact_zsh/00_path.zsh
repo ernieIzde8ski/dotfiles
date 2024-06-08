@@ -19,13 +19,15 @@ fi
 for gem_bin in $(find -maxdepth 4 -name bin "/usr/lib/ruby/gems/" 2>/dev/null); do
     PATH="$gem_bin:$PATH"
 done
+unset gem_bin
 
-prepend_list=("$CABAL_DIR" "$CARGO_HOME" "$NEWVOID/Random/CEDev" "$HOME/.local")
+prepend_list=("$CABAL_DIR" "$XDG_DATA_HOME/npm" "$CARGO_HOME" "$NEWVOID/Random/CEDev" "$HOME/.local")
 for dir in $prepend_list; do
     dir="$dir/bin"
     if [[ -d "$dir" ]]; then
         PATH="$dir:$PATH"
     fi
 done
+unset dir
 
 export PATH
