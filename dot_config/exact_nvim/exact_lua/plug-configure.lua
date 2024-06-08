@@ -176,6 +176,7 @@ local function setup()
     })
 
     require("config-local").setup({ lookup_parents = true })
+    require("autoclose").setup()
 
     setup_display()
 

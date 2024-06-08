@@ -31,8 +31,9 @@ Plug("nvim-treesitter/nvim-treesitter", { ["do"] = ":TSUpdate" })
 Plug("rebelot/kanagawa.nvim")
 
 -- misc
-Plug("tpope/vim-eunuch")
 Plug("klen/nvim-config-local")
+Plug("m4xshen/autoclose.nvim")
+Plug("tpope/vim-eunuch")
 
 if vim.g.discord_available then
     Plug("IogaMaster/neocord")
