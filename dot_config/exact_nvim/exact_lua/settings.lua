@@ -1,3 +1,5 @@
+local has = vim.fn["has"]
+
 -- netrw - list as a tree by default
 vim.g.netrw_liststyle = 3
 vim.g.netrw_list_hide = "\\(node_modules\\|venv\\|.git\\|__pycache__\\)/"
@@ -17,6 +19,11 @@ vim.opt.expandtab = true
 vim.opt.softtabstop = 4
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 0
+
+-- set vim.opt
+if has("termguicolors") then
+    vim.opt.termguicolors = true
+end
 
 -- misc
 vim.lsp.inlay_hint.enable()

@@ -1,5 +1,3 @@
-local has = vim.fn["has"]
-
 local lsp_keymaps = {
     ["<Leader>a"] = "code_action",
     ["<Leader>f"] = "format",
@@ -134,6 +132,7 @@ local function setup_lspconfig()
 end
 
 local function setup_display()
+    -- treesitter
     require("nvim-treesitter.configs").setup({
         ensure_installed = {
             "gotmpl",
@@ -151,12 +150,14 @@ local function setup_display()
         indent = { enable = true },
     })
 
-    if has("termguicolors") then
-        vim.o.termguicolors = true
-    end
-
+    -- kanagawa color scheme
     vim.cmd("syntax enable")
     vim.cmd("colorscheme kanagawa")
+
+    -- floating notifications
+    if vim.opt.termguicolors then
+        vim.notify = require("notify")
+    end
 
     -- making floating displays have a border
     local float_border = { border = "single" }

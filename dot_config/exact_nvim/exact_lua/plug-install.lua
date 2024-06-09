@@ -30,6 +30,10 @@ Plug("lewis6991/gitsigns.nvim")
 Plug("nvim-treesitter/nvim-treesitter", { ["do"] = ":TSUpdate" })
 Plug("rebelot/kanagawa.nvim")
 
+if vim.opt.termguicolors then
+    Plug("rcarriga/nvim-notify")
+end
+
 -- misc
 Plug("klen/nvim-config-local")
 Plug("m4xshen/autoclose.nvim")
