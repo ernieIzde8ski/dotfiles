@@ -157,6 +157,7 @@ local function setup_display()
     -- floating notifications
     if vim.opt.termguicolors then
         vim.notify = require("notify")
+        require("lsp-notify").setup({})
     end
 
     -- making floating displays have a border

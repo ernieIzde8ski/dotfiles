@@ -25,6 +25,7 @@ plug("rebelot/kanagawa.nvim")
 
 if vim.opt.termguicolors then
     plug("rcarriga/nvim-notify")
+    plug("mrded/nvim-lsp-notify")
 end
 
 -- misc
