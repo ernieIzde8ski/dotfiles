@@ -144,6 +144,7 @@ local function setup_display()
             "rust",
             "toml",
             "typescript",
+            "vimdoc",
             "yaml",
         },
         highlight = { enable = true },
