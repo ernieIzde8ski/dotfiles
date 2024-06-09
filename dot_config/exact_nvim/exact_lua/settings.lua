@@ -27,6 +27,7 @@ vim.filetype.add({
     filename = {
         [".chezmoiignore"] = "gotmpl",
         [".chezmoiremove"] = "gotmpl",
+        [".jsbeautifyrc"] = "json",
     },
     pattern = {
         [".*.tmpl"] = "gotmpl",

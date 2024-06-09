@@ -60,19 +60,60 @@ local function setup_completions()
     })
 end
 
+local function on_lsp_attach(args)
+    local bufnr = args.buf
+    local keymap_opts = { noremap = true, silent = true }
+
+    for lhs, rhs in pairs(lsp_keymaps) do
+        vim.api.nvim_buf_set_keymap(
+            bufnr,
+            "n",
+            lhs,
+            "<cmd>lua vim.lsp.buf." .. rhs .. "()<CR>",
+            keymap_opts
+        )
+    end
+end
+
 local function setup_lspconfig()
     local cmp_nvim_lsp = require("cmp_nvim_lsp")
     local lspconfig = require("lspconfig")
 
     -- setup for lspconfig
     local capabilities = cmp_nvim_lsp.default_capabilities()
-    local default_opts = { capabilities = capabilities }
 
-    lspconfig.gopls.setup(default_opts)
-    lspconfig.hls.setup({
-        capabilities = capabilities,
-        filetypes = { "haskell", "lhaskell", "cabal" },
-    })
+    -- all servers that use the default capabilities
+    local servers = {
+        gopls = {},
+        hls = {
+            filetypes = { "haskell", "lhaskell", "cabal" },
+        },
+        jsonls = {},
+        lua_ls = {
+            settings = {
+                Lua = {
+                    diagnostics = {
+                        globals = { "vim", "require" },
+                    },
+                    runtime = { version = "LuaJIT" },
+                    workspace = {
+                        library = vim.api.nvim_get_runtime_file("", true),
+                    },
+                },
+            },
+        },
+        pyright = {},
+        tsserver = {},
+        typst_lsp = {
+            settings = { exportPdf = "never" },
+        },
+    }
+
+    for server, settings in pairs(servers) do
+        settings.capabilities = capabilities
+        lspconfig[server].setup(settings)
+    end
+
     lspconfig.rust_analyzer.setup({
         settings = {
             ["rust-analyzer"] = {
@@ -87,45 +128,9 @@ local function setup_lspconfig()
             },
         },
     })
-    lspconfig.pyright.setup(default_opts)
-    lspconfig.tsserver.setup(default_opts)
-    lspconfig.typst_lsp.setup({
-        capabilities = capabilities,
-        settings = { exportPdf = "onSave" },
-    })
-
-    lspconfig.lua_ls.setup({
-        capabilities = capabilities,
-        settings = {
-            Lua = {
-                diagnostics = {
-                    globals = { "vim", "require" },
-                },
-                runtime = { version = "LuaJIT" },
-                workspace = {
-                    library = vim.api.nvim_get_runtime_file("", true),
-                },
-            },
-        },
-    })
 
     -- attaching keymaps, floating displays alongside the lsp
-    vim.api.nvim_create_autocmd("LspAttach", {
-        callback = function(args)
-            local bufnr = args.buf
-            local keymap_opts = { noremap = true, silent = true }
-
-            for lhs, rhs in pairs(lsp_keymaps) do
-                vim.api.nvim_buf_set_keymap(
-                    bufnr,
-                    "n",
-                    lhs,
-                    "<cmd>lua vim.lsp.buf." .. rhs .. "()<CR>",
-                    keymap_opts
-                )
-            end
-        end,
-    })
+    vim.api.nvim_create_autocmd("LspAttach", { callback = on_lsp_attach })
 end
 
 local function setup_display()
