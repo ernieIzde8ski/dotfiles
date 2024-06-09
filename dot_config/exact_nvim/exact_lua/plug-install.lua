@@ -1,46 +1,46 @@
-local Plug = vim.fn["plug#"]
-
--- automatic installation of missing plugins
--- don't ask me how it works, it's on the wiki
-vim.cmd([[
-   autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
-        \| PlugInstall --sync | source $MYVIMRC
-    \| endif
-]])
+local plug = vim.fn["plug#"]
+local plug_install = vim.cmd["PlugInstall"]
 
 vim.call("plug#begin")
 
-Plug("nvim-lua/plenary.nvim")
+plug("nvim-lua/plenary.nvim")
 
 -- lsp
-Plug("neovim/nvim-lspconfig")
-Plug("hrsh7th/cmp-nvim-lsp")
-Plug("hrsh7th/cmp-buffer")
-Plug("hrsh7th/cmp-path")
-Plug("hrsh7th/cmp-cmdline")
-Plug("petertriho/cmp-git")
-Plug("hrsh7th/nvim-cmp")
+plug("neovim/nvim-lspconfig")
+plug("hrsh7th/cmp-nvim-lsp")
+plug("hrsh7th/cmp-buffer")
+plug("hrsh7th/cmp-path")
+plug("hrsh7th/cmp-cmdline")
+plug("petertriho/cmp-git")
+plug("hrsh7th/nvim-cmp")
 
 -- git
-Plug("tpope/vim-fugitive")
-Plug("tpope/vim-rhubarb")
-Plug("lewis6991/gitsigns.nvim")
+plug("tpope/vim-fugitive")
+plug("tpope/vim-rhubarb")
+plug("lewis6991/gitsigns.nvim")
 
 -- rendering
-Plug("nvim-treesitter/nvim-treesitter", { ["do"] = ":TSUpdate" })
-Plug("rebelot/kanagawa.nvim")
+plug("nvim-treesitter/nvim-treesitter", { ["do"] = ":TSUpdate" })
+plug("rebelot/kanagawa.nvim")
 
 if vim.opt.termguicolors then
-    Plug("rcarriga/nvim-notify")
+    plug("rcarriga/nvim-notify")
 end
 
 -- misc
-Plug("klen/nvim-config-local")
-Plug("m4xshen/autoclose.nvim")
-Plug("tpope/vim-eunuch")
+plug("klen/nvim-config-local")
+plug("m4xshen/autoclose.nvim")
+plug("tpope/vim-eunuch")
 
 if vim.g.discord_available then
-    Plug("IogaMaster/neocord")
+    plug("IogaMaster/neocord")
 end
 
 vim.call("plug#end")
+
+for _, v in pairs(vim.g.plugs) do
+    if vim.fn.isdirectory(v.dir) == 0 then
+        plug_install("--sync")
+        break
+    end
+end
