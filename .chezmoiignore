@@ -18,17 +18,12 @@ pyproject.toml
 {{ end }}
 
 
-{{ if not (lookPath "wg-quick") }}
-    .local/bin/wg-random.py
-    .local/bin/wg-speedtest.py
-{{ end }}
-
-
 {{ if not (lookPath "zsh") }}
     .zshrc
     .config/zsh/
     .local/share/zsh/
-    # in a move of Ultimate Pettiness, I delete bash configs whenever zsh is installed
+    # in a move of Ultimate Pettiness,
+    # I delete bash configs whenever zsh is installed
     .bash_history
     .bash_logout
     .bashrc
@@ -48,17 +43,8 @@ pyproject.toml
         .config/discord/
     {{ end }}
 
-    {{ if not (lookPath "code") }}
-        .local/share/applications/visual-studio-code*
-    {{ end }}
-
     {{ if not (lookPath "konsole") }}
         .local/share/konsole/
-    {{ end }}
-
-    {{ if not (lookPath "ghostwriter") }}
-        .config/kde.org/ghostwriter.conf
-        .local/share/ghostwriter/
     {{ end }}
 
     {{ if not (and (lookPath "pipewire-pulse") (lookPath "wireplumber")) }}
@@ -76,13 +62,9 @@ pyproject.toml
     # all GUI-based stuff
     .config/autostart/
     .config/discord/
-    .config/kde.org/
     .config/spectaclerc/
     .config/pipewire/
-    .local/bin/update-vscode
-    .local/bin/update-discord
     .local/share/applications/
-    .local/share/ghostwriter/
     .local/share/konsole/
     .local/share/xsession
     .ssh/config
