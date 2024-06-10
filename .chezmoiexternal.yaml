@@ -6,27 +6,27 @@
 ##########################################################################################
 ##### zsh plugins
 
-".local/share/zsh/autoswitch_virtualenv.plugin.zsh":
+".local/share/zsh_plugins/autoswitch_virtualenv.plugin.zsh":
   type: "file"
   url:  "https://raw.githubusercontent.com/MichaelAquilina/zsh-autoswitch-virtualenv/master/autoswitch_virtualenv.plugin.zsh"
   refreshPeriod: "168h"
 
-".local/share/zsh/fancy-ctrl-z-mode.plugin.zsh":
+".local/share/zsh_plugins/fancy-ctrl-z-mode.plugin.zsh":
   type: "file"
   url:  "https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/plugins/fancy-ctrl-z/fancy-ctrl-z.plugin.zsh"
   refreshPeriod: "168h"
 
-".local/share/zsh/zsh-not-vim/":
+".local/share/zsh_plugins/zsh-not-vim/":
   type: "git-repo"
   url:  "https://github.com/redxtech/zsh-not-vim.git"
   refreshPeriod: "168h"
 
-".local/share/zsh/zsh-syntax-highlighting/":
+".local/share/zsh_plugins/zsh-syntax-highlighting/":
   type: "git-repo"
   url:  "https://github.com/zsh-users/zsh-syntax-highlighting.git"
   refreshPeriod: "168h"
 
-".local/share/zsh/zsh-vi-mode/":
+".local/share/zsh_plugins/zsh-vi-mode/":
   type: "git-repo"
   url:  "https://github.com/jeffreytse/zsh-vi-mode.git"
   refreshPeriod: "168h"

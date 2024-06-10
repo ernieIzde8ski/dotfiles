@@ -1,33 +1,37 @@
 #!/bin/zsh
-# Sets $PATH and similar variables
 
-XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
+# variables we need for $PATH
 
-export CABAL_DIR="$XDG_DATA_HOME/cabal"
+export XDG_BIN_HOME="${XDG_BIN_HOME:-$HOME/.local/bin}"
+export XDG_CACHE_HOME="${XDG_CACHE_HOME:-$HOME/.cache}"
+export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
+export XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
+export XDG_STATE_HOME="${XDG_STATE_HOME:-$HOME/.local/state}"
+
+
+export CABAL_DIR="${CABAL_DIR:-$XDG_DATA_HOME/cabal}"
+export INDARYS="/mnt/indarys"
 
 export RUSTUP_HOME="${RUSTUP_HOME:-$XDG_DATA_HOME/rustup}"
 export CARGO_HOME="${CARGO_HOME:-$XDG_DATA_HOME/cargo}"
-[[ -f "$CARGO_HOME/env" ]] && source "$CARGO_HOME/env"
+[ -f "$CARGO_HOME/env" ] && source "$CARGO_HOME/env"
 
-# updating NEWVOID-related files, depending on if the mountpoint even
-# exists yet and if it's mounted at all
-if [[ ! -v NEWVOID && -d /mnt/NEWVOID ]]; then
-    export NEWVOID="/mnt/NEWVOID"
-fi
 
-# appending the binaries of ruby gems
-for gem_bin in $(find -maxdepth 4 -name bin "/usr/lib/ruby/gems/" 2>/dev/null); do
-    PATH="$gem_bin:$PATH"
+# actual additions to $PATH
+
+# prevent duplicating keys in subshells
+typeset -aU path
+
+# ruby gems
+for gem_dir in $(find -maxdepth 4 -name bin "/usr/lib/ruby/gems/" 2>/dev/null); do
+    path=("$gem_dir" $path)
 done
-unset gem_bin
+unset gem_dir
 
-prepend_list=("$CABAL_DIR" "$XDG_DATA_HOME/npm" "$CARGO_HOME" "$NEWVOID/Random/CEDev" "$HOME/.local")
-for dir in $prepend_list; do
-    dir="$dir/bin"
-    if [[ -d "$dir" ]]; then
-        PATH="$dir:$PATH"
-    fi
+prepend_list=("$CABAL_DIR" "$XDG_DATA_HOME/npm" "$CARGO_HOME" "$INDARYS/Random/CEDev" "$HOME/.local")
+for prepend_dir in $prepend_list; do
+    path=("$prepend_dir/bin" $path)
 done
-unset dir
+unset prepend_dir
 
 export PATH

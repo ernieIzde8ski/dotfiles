@@ -1,11 +1,6 @@
-# The following lines were added by compinstall
-zstyle :compinstall filename '/home/ernie/.zshrc'
+zstyle :compinstall filename "$HOME/.config/zsh/.zshrc"
 
-autoload -Uz compinit
-compinit
-# End of lines added by compinstall
 # Lines configured by zsh-newuser-install
-HISTFILE=$HOME/.local/share/.zsh_history
 HISTSIZE=1000
 SAVEHIST=1000
 setopt autocd beep nomatch notify
@@ -13,14 +8,11 @@ unsetopt extendedglob
 bindkey -v
 # End of lines configured by zsh-newuser-install
 
-# define function array
-precmd_functions=( )
-
 # load extra scripts
 for script in "$ZDOTDIR"/*.zsh; do
   source $script
 done
 
-for script in "$HOME/.local/share/zsh/"**/*.plugin.zsh; do
+for script in "$HOME/.local/share/zsh_plugins/"**/*.plugin.zsh; do
     source $script
 done

@@ -1,10 +1,7 @@
 # --- Generic ignores
 # --- # These apply to every system.
 
-README.md
-pyproject.toml
 **/__pycache__
-.vscode/
 .config/zsh/.zcompdump
 
 

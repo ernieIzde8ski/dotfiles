@@ -11,7 +11,16 @@ if [[ ! "$MANPATH" =~ ":$HOME\\b" ]]; then
 fi
 
 
-editors=("vim" "micro" "nano")
+editors=("nvim" "vim")
 for editor in $editors; do
     export EDITOR="$(command -v ${editor})" && break;
 done
+
+
+ZSH_CACHE_HOME="$XDG_CACHE_HOME/zsh"
+[[ -d "$ZSH_CACHE_HOME" ]] || mkdir -p "$ZSH_CACHE_HOME"
+
+HISTFILE="$ZSH_CACHE_HOME/history"
+autoload -Uz compinit
+compinit -d "$ZSH_CACHE_HOME/zcompdump-$ZSH_VERSION"
+zstyle ':completion:*' cache-path "$ZSH_CACHE_HOME/zcompcache"
