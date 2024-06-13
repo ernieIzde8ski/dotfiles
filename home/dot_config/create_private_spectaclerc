@@ -1,0 +1,18 @@
+[General]
+autoSaveImage=true
+clipboardGroup=PostScreenshotCopyImage
+launchAction=DoNotTakeScreenshot
+rememberSelectionRect=Never
+
+[GuiConfig]
+captureDelay=1
+captureMode=5
+
+[ImageSave]
+imageFilenameTemplate=<title>/<yyyy>-<MM>-<dd>_<HH>-<mm>-<ss>
+imageSaveLocation=file://{{.chezmoi.homeDir}}/Pictures/Screenshots
+translatedScreenshotsFolder=Capturas de pantalla
+
+[VideoSave]
+preferredVideoFormat=0
+translatedScreencastsFolder=Videocapturas de pantalla
