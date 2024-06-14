@@ -41,13 +41,22 @@ vim.filetype.add({
     },
 })
 
+local set_keymap = vim.api.nvim_set_keymap
+
 -- close other buffers
-vim.keymap.set({ "n", "v" }, "<Leader>bd", "mc<cmd>wall | %bd | e# | bd#<cr>`c")
-vim.keymap.set("n", "<C-B>", "Bi")
-vim.keymap.set("n", "<C-W>d", "<cmd>lua vim.diagnostic.open_float()<cr>")
-vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<cr>")
-vim.keymap.set("n", "<F3>", "<cmd>Explore<cr>")
-vim.keymap.set("n", "<F5>", "<cmd>update<cr>")
-vim.keymap.set("n", "<F6>", "<cmd>!%:p<cr>") -- execute current file
-vim.keymap.set("n", "[d", "<cmd>lua vim.diagnostic.goto_prev()<cr>")
-vim.keymap.set("n", "]d", "<cmd>lua vim.diagnostic.goto_next()<cr>")
+set_keymap("n", "<Leader>bd", "mc<cmd>wall | %bd | e# | bd#<cr>`c", {})
+
+-- FOOT PEDAL.
+set_keymap("n", "<F13>", "<cmd>bprev<cr>", {})
+set_keymap("v", "<F13>", "<cmd>bprev<cr>", {})
+set_keymap("n", "<F14>", "<Leader>", {})
+set_keymap("n", "<F15>", "<cmd>bnext<cr>", {})
+set_keymap("v", "<F13>", "<cmd>bprev<cr>", {})
+
+-- other keymaps
+set_keymap("n", "<C-B>", "Bi", {})
+set_keymap("n", "<C-W>d", "", { callback = vim.diagnostic.open_float })
+set_keymap("n", "<Esc>", "<cmd>nohlsearch<cr>", {})
+set_keymap("n", "<F3>", "<cmd>Explore<cr>", {})
+set_keymap("n", "<F5>", "<cmd>update<cr>", {})
+set_keymap("n", "<F6>", "<cmd>!%:p<cr>", {}) -- execute current file
