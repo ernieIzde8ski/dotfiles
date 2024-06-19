@@ -11,7 +11,7 @@
 {{ end }}
 
 {{ if not (lookPath "npm") }}
-    .npmrc
+    .config/npm/
 {{ end }}
 
 
