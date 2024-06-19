@@ -133,16 +133,26 @@ end
 
 local function setup_display()
     -- treesitter
+
+    ---@diagnostic disable-next-line: missing-fields
     require("nvim-treesitter.configs").setup({
         ensure_installed = {
+            "diff",
+            "gitignore",
+            "gitcommit",
             "gotmpl",
+            "haskell",
+            "ini",
             "javascript",
+            "json",
+            "jsonc",
             "lua",
             "markdown",
             "python",
             "rust",
             "toml",
             "typescript",
+            "typst",
             "vimdoc",
             "yaml",
         },
