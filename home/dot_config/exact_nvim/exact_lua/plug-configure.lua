@@ -194,7 +194,16 @@ local function setup()
     })
 
     require("config-local").setup({ lookup_parents = true })
-    require("autoclose").setup()
+    require("autoclose").setup({
+        keys = {
+            ["'"] = {
+                close = false,
+                escape = true,
+                pair = "''",
+                disable_command_mode = true,
+            },
+        },
+    })
 
     setup_display()
 
@@ -206,5 +215,4 @@ local function setup()
         })
     end
 end
-
 setup()
