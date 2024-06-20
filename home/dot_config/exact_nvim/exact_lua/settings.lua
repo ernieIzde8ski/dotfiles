@@ -25,6 +25,19 @@ if has("termguicolors") then
     vim.opt.termguicolors = true
 end
 
+-- making floating displays have a border
+local float_border = { border = "single" }
+
+vim.lsp.handlers["textDocument/hover"] =
+    vim.lsp.with(vim.lsp.handlers.hover, float_border)
+
+vim.lsp.handlers["textDocument/signatureHelp"] =
+    vim.lsp.with(vim.lsp.handlers.signature_help, float_border)
+
+vim.diagnostic.config({
+    float = float_border,
+})
+
 -- misc
 vim.lsp.inlay_hint.enable()
 vim.opt.scrolloff = 5
