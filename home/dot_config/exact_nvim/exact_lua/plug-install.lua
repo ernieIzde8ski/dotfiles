@@ -1,12 +1,16 @@
 local plug = vim.fn["plug#"]
-local plug_install = vim.cmd["PlugInstall"]
+local plug_install = vim.cmd.PlugInstall
 
 vim.call("plug#begin")
 
 plug("nvim-lua/plenary.nvim")
 
 -- lsp
+plug("williamboman/mason.nvim")
+plug("williamboman/mason-lspconfig.nvim")
 plug("neovim/nvim-lspconfig")
+
+-- completions
 plug("hrsh7th/cmp-nvim-lsp")
 plug("hrsh7th/cmp-buffer")
 plug("hrsh7th/cmp-path")

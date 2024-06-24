@@ -1,5 +1,7 @@
 local cmp_nvim_lsp = require("cmp_nvim_lsp")
 local lspconfig = require("lspconfig")
+local mason = require("mason")
+local mason_lspconfig = require("mason-lspconfig")
 
 local lsp_keymaps = {
     ["<Leader>a"] = "code_action",
@@ -28,12 +30,11 @@ local function on_lsp_attach(args)
 end
 
 -- all servers that use the default capabilities
-local lsp_servers = {
-    gopls = {},
+
+local lspconfig_server_configs = {
     hls = {
         filetypes = { "haskell", "lhaskell", "cabal" },
     },
-    jsonls = {},
     lua_ls = {
         settings = {
             Lua = {
@@ -47,34 +48,53 @@ local lsp_servers = {
             },
         },
     },
-    pyright = {},
-    tsserver = {},
     typst_lsp = {
         settings = { exportPdf = "never" },
     },
 }
 
 -- setup for lspconfig
+mason.setup()
+mason_lspconfig.setup({
+    ensure_installed = {
+        "gopls",
+        "jsonls",
+        "pyright",
+        "rust_analyzer",
+        "tsserver",
+        "tinymist",
+    },
+})
+
 local capabilities = cmp_nvim_lsp.default_capabilities()
 
-for server, settings in pairs(lsp_servers) do
-    settings.capabilities = capabilities
-    lspconfig[server].setup(settings)
-end
+mason_lspconfig.setup_handlers({
+    function(server_name)
+        local config = lspconfig_server_configs[server_name]
+        if config == nil then
+            lspconfig[server_name].setup({ capabilities = capabilities })
+        else
+            config.capabilities = capabilities
+            lspconfig[server_name].setup(config)
+        end
+    end,
 
-lspconfig.rust_analyzer.setup({
-    settings = {
-        ["rust-analyzer"] = {
-            imports = {
-                granularity = { group = "module" },
-                prefix = "self",
+    ["rust_analyzer"] = function()
+        lspconfig.rust_analyzer.setup({
+            settings = {
+                ["rust-analyzer"] = {
+                    imports = {
+                        granularity = { group = "module" },
+                        prefix = "self",
+                    },
+                    cargo = {
+                        buildScripts = { enable = true },
+                    },
+                    procMacro = { enable = true },
+                },
             },
-            cargo = {
-                buildScripts = { enable = true },
-            },
-            procMacro = { enable = true },
-        },
-    },
+        })
+    end,
 })
 
 -- attaching keymaps, floating displays alongside the lsp
