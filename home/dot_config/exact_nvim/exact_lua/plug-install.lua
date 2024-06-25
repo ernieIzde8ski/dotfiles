@@ -6,6 +6,8 @@ plug("nvim-lua/plenary.nvim")
 
 -- lsp
 plug("williamboman/mason.nvim")
+plug("nvimtools/none-ls.nvim")
+plug("jay-babu/mason-null-ls.nvim")
 plug("williamboman/mason-lspconfig.nvim")
 plug("neovim/nvim-lspconfig")
 

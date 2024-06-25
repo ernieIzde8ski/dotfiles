@@ -2,6 +2,8 @@ local cmp_nvim_lsp = require("cmp_nvim_lsp")
 local lspconfig = require("lspconfig")
 local mason = require("mason")
 local mason_lspconfig = require("mason-lspconfig")
+local mason_null_ls = require("mason-null-ls")
+local null_ls = require("null-ls")
 
 local lsp_keymaps = {
     ["<Leader>a"] = "code_action",
@@ -54,7 +56,29 @@ local lspconfig_server_configs = {
 }
 
 -- setup for lspconfig
-mason.setup()
+mason.setup({
+    ui = {
+        icons = {
+            package_installed = "✓",
+            package_pending = "➜",
+            package_uninstalled = "✗",
+        },
+    },
+})
+
+mason_null_ls.setup({
+    automatic_installation = true,
+    ensure_installed = { "prettierd" },
+})
+
+null_ls.setup({
+    sources = {
+        null_ls.builtins.code_actions.gitrebase,
+        null_ls.builtins.code_actions.gitsigns,
+        null_ls.builtins.formatting.prettierd,
+    },
+})
+
 mason_lspconfig.setup({
     ensure_installed = {
         "gopls",
