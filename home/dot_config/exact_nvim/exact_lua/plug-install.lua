@@ -1,5 +1,4 @@
 local plug = vim.fn["plug#"]
-local plug_install = vim.cmd.PlugInstall
 
 vim.call("plug#begin")
 
@@ -42,10 +41,3 @@ if vim.g.discord_available then
 end
 
 vim.call("plug#end")
-
-for _, v in pairs(vim.g.plugs) do
-    if vim.fn.isdirectory(v.dir) == 0 then
-        plug_install("--sync")
-        break
-    end
-end
