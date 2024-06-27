@@ -1,6 +1,11 @@
 #!/bin/zsh
 
-alias ls="ls --color=auto"
+if lsd_path="$(command -v 'lsd')"; then
+    alias ls="$lsd_path"
+else
+    alias ls="ls --color=auto"
+fi
+
 alias ll="ls -l"
 alias la="ls -A"
 alias sizeof="du -sh --"
