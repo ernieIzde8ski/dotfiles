@@ -68,6 +68,7 @@ set_keymap("v", "<F13>", "<cmd>bprev<cr>", {})
 
 -- other keymaps
 set_keymap("n", "<C-B>", "Bi", {})
+set_keymap("i", "<C-B>", "<Esc>Bi", {})
 set_keymap("n", "<C-W>d", "", { callback = vim.diagnostic.open_float })
 set_keymap("n", "<Esc>", "<cmd>nohlsearch<cr>", {})
 set_keymap("n", "<F3>", "<cmd>Explore<cr>", {})
