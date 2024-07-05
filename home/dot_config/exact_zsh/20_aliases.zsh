@@ -8,6 +8,8 @@ fi
 
 alias ll="ls -l"
 alias la="ls -A"
+
+alias choice='shuf -en1'
 alias info='info --vi-keys'
 alias sizeof="du -sh --"
 alias ...=../..
