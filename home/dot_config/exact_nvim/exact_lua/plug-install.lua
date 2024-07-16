@@ -33,6 +33,9 @@ if vim.opt.termguicolors then
     plug("mrded/nvim-lsp-notify")
 end
 
+plug("nvim-tree/nvim-web-devicons")
+plug("nvim-tree/nvim-tree.lua")
+
 -- misc
 plug("klen/nvim-config-local")
 plug("m4xshen/autoclose.nvim")

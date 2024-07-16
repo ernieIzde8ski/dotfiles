@@ -2,18 +2,16 @@ local plug_install = vim.cmd.PlugInstall
 
 ---@type string[]
 local setup_scripts = {
+    "nvimrc",
     "completions",
+    "display",
     "lsp",
     "misc",
 }
 
--- try to load display first
--- but load it with the rest of the scripts if unavailable
+-- Try to load display first, if possible
 
-local display_ok, _ = pcall(require, "plug-setup.display")
-if not display_ok then
-    table.insert(setup_scripts, "display")
-end
+pcall(require, "plug-setup.display")
 
 -- ensure missing plugins are installed
 

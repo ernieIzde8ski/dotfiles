@@ -1,10 +1,5 @@
 local has = vim.fn["has"]
 
--- netrw - list as a tree by default
-vim.g.netrw_liststyle = 3
-vim.g.netrw_list_hide = "\\(node_modules\\|venv\\|.git\\|__pycache__\\)/"
-vim.g.netrw_bufsettings = "noma nomod nu rnu nobl nowrap ro"
-
 -- line display
 vim.opt.number = true
 vim.opt.relativenumber = true
@@ -71,6 +66,5 @@ set_keymap("n", "<C-B>", "Bi", {})
 set_keymap("i", "<C-B>", "<Esc>Bi", {})
 set_keymap("n", "<C-W>d", "", { callback = vim.diagnostic.open_float })
 set_keymap("n", "<Esc>", "<cmd>nohlsearch<cr>", {})
-set_keymap("n", "<F3>", "<cmd>Explore<cr>", {})
 set_keymap("n", "<F5>", "<cmd>update<cr>", {})
 set_keymap("n", "<F6>", "<cmd>!%:p<cr>", {}) -- execute current file

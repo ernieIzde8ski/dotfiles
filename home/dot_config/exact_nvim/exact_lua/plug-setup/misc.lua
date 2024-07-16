@@ -3,7 +3,6 @@ require("gitsigns").setup({
     current_line_blame = true,
 })
 
-require("config-local").setup({ lookup_parents = true })
 require("autoclose").setup({
     keys = {
         ["'"] = {
