@@ -1,9 +1,11 @@
-".local/share/nvim/site/autoload/plug.vim":
-  type:           "file"
-  url:            "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
-  refreshPeriod:  "168h"
+##### neovim plugin manager
 
-##########################################################################################
+".local/share/nvim/lazy/lazy.nvim":
+  type:           "git-repo"
+  url:            "https://github.com/folke/lazy.nvim"
+  refreshPeriod:  "168h"
+  clone.args: ["--branch", "stable"]
+
 ##### zsh plugins
 
 ".local/share/zsh_plugins/autoswitch_virtualenv.plugin.zsh":

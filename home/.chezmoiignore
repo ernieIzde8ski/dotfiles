@@ -6,6 +6,8 @@
 
 
 # --- misc program-specific bindings
+.config/nvim/lazy-lock.json
+
 {{ if not (lookPath "micro") }}
     .config/micro/
 {{ end }}

@@ -2,10 +2,7 @@
     vim.o.background = "light"
 {{ else -}}
     vim.o.background = "dark"
-{{ end -}}
-
-vim.g.discord_available = os.execute("test -S $XDG_RUNTIME_DIR/discord-ipc-0") == 0
+{{ end }}
 
 require("settings")
-require("plug-install")
-require("plug-setup")
+require("lazy-config")

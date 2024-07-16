@@ -2,7 +2,7 @@ local plug_install = vim.cmd.PlugInstall
 
 ---@type string[]
 local setup_scripts = {
-    "nvimrc",
+    -- "nvimrc",
     "completions",
     "display",
     "lsp",
