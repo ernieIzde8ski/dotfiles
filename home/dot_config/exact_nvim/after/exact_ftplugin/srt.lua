@@ -3,9 +3,10 @@ vim.opt_local.tabstop = 2
 
 vim.opt_local.colorcolumn = "40,75,80"
 
+local set_keymap = require("helpers.set-keymap")
 local bufnr = vim.api.nvim_get_current_buf()
-local opts = { noremap = true, silent = true }
 
-vim.api.nvim_buf_set_keymap(bufnr, "n", "<Leader>n", [[/^\d\+$<CR>]], opts)
+-- jump to next line
+set_keymap("n", "<Leader>n", [[/^\d\+$<CR>]], bufnr)
 -- italicize with ctrl+i
-vim.api.nvim_buf_set_keymap(bufnr, "v", "<C-I>", [[di<i></i><Esc>F<P]], opts)
+set_keymap("v", "<C-I>", [[di<i></i><Esc>F<P]], bufnr)

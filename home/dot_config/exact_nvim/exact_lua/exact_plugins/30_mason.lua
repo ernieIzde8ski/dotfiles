@@ -1,3 +1,5 @@
+local set_keymap = require("helpers.set-keymap")
+
 ---@type { [string]: string }
 local _lsp_keymaps = {
     ["<Leader>a"] = "code_action",
@@ -10,36 +12,30 @@ local _lsp_keymaps = {
     ["gr"] = "references",
 }
 
----@type fun(name: string): { noremap: boolean, silent: boolean, callback: function }
-local function _keymap_opts(name)
-    return { noremap = true, silent = true, callback = vim.lsp.buf[name] }
-end
-
 ---@param args { buf: number, data: any }
 ---@return nil
 local function on_lsp_attach(args)
     local bufnr = args.buf
     local client = vim.lsp.get_client_by_id(args.data.client_id)
 
-    for key, map in pairs(_lsp_keymaps) do
-        local opts = _keymap_opts(map)
-        vim.api.nvim_buf_set_keymap(bufnr, "n", key, "", opts)
+    for key, buf_op in pairs(_lsp_keymaps) do
+        set_keymap("n", key, vim.lsp.buf[buf_op], bufnr)
     end
 
     if client ~= nil and client.supports_method("textDocument/inlayHint") then
         vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
-        vim.keymap.set("n", "<leader>i", function()
+        set_keymap("n", "<Leader>i", function()
             vim.lsp.inlay_hint.enable(
                 not vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr }),
                 { bufnr = bufnr }
             )
-        end, { buffer = bufnr })
+        end, bufnr)
     end
 end
 
 -- all servers that use default capabilities
 ---@type { [string]: { filetypes?: string[], capabilities: any, settings: any } }
-local lspconfig_server_configs = {
+local server_configs = {
     hls = {
         filetypes = { "haskell", "lhaskell", "cabal" },
     },
@@ -146,7 +142,7 @@ return {
 
             mason_lspconfig.setup_handlers({
                 function(server_name)
-                    local config = lspconfig_server_configs[server_name]
+                    local config = server_configs[server_name]
                     if config == nil then
                         lspconfig[server_name].setup({ capabilities = capabilities })
                     else

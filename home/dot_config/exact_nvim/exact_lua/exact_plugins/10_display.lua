@@ -1,3 +1,5 @@
+local set_keymap = require("helpers.set-keymap")
+
 return {
     -- treesitter
     {
@@ -54,19 +56,8 @@ return {
                 },
             })
 
-            local nvim_tree_api = require("nvim-tree.api")
-            vim.api.nvim_set_keymap(
-                "n",
-                "<F3>",
-                "",
-                { callback = nvim_tree_api.tree.toggle }
-            )
-            vim.api.nvim_set_keymap(
-                "v",
-                "<F3>",
-                "",
-                { callback = nvim_tree_api.tree.toggle }
-            )
+            local api = require("nvim-tree.api")
+            set_keymap({ "n", "v" }, "<F3>", api.tree.toggle)
         end,
     },
 
@@ -80,15 +71,50 @@ return {
     },
 
     -- git stuff
-    { "tpope/vim-fugitive" },
-    { "tpope/vim-rhubarb" },
+    {
+        "tpope/vim-fugitive",
+        config = function()
+            set_keymap("n", "<Leader>gcc", ":Git commit")
+            set_keymap("n", "<Leader>gcc", ":Git commit --patch")
+        end,
+    },
+
+    {
+        "tpope/vim-rhubarb",
+        dependencies = "tpope/vim-fugitive",
+        config = function()
+            set_keymap({ "n", "v" }, "<Leader>gb", ":GBrowse")
+        end,
+    },
+
     {
         "lewis6991/gitsigns.nvim",
         dependencies = { "nvim-lua/plenary.nvim" },
-        opts = {
-            attach_to_untracked = true,
-            current_line_blame = true,
-        },
+        config = function()
+            local gitsigns = require("gitsigns")
+
+            gitsigns.setup({
+                attach_to_untracked = false,
+                current_line_blame = true,
+                current_line_blame_opts = {
+                    delay = 0,
+                    virt_text_pos = "right_align",
+                },
+                numhl = true,
+            })
+
+            set_keymap("n", "<Leader>gs", gitsigns.stage_hunk)
+            set_keymap("n", "<Leader>gS", gitsigns.stage_buffer)
+            set_keymap("n", "<Leader>gP", gitsigns.preview_hunk_inline)
+            set_keymap({ "n", "v" }, "<Leader>gp", gitsigns.preview_hunk)
+            set_keymap({ "n", "v" }, "<Leader>gw", gitsigns.toggle_word_diff)
+            set_keymap({ "n", "v" }, "[g", function()
+                gitsigns.nav_hunk("prev")
+            end)
+            set_keymap({ "n", "v" }, "]g", function()
+                gitsigns.nav_hunk("next")
+            end)
+        end,
     },
 
     -- LSP display

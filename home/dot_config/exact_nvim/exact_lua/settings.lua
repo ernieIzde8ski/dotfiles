@@ -1,4 +1,5 @@
 local has = vim.fn["has"]
+local set_keymap = require("helpers.set-keymap")
 
 -- confirm before destructive actions
 vim.opt.confirm = true
@@ -70,22 +71,18 @@ vim.filetype.add({
     },
 })
 
-local set_keymap = vim.api.nvim_set_keymap
-
 -- close other buffers
-set_keymap("n", "<Leader>bd", "mc<cmd>wall | %bd | e# | bd#<cr>`c", {})
+set_keymap("n", "<Leader>bd", "mc<cmd>wall | %bd | e# | bd#<cr>`c")
 
 -- FOOT PEDAL.
-set_keymap("n", "<F13>", "<cmd>bprev<cr>", {})
-set_keymap("v", "<F13>", "<cmd>bprev<cr>", {})
-set_keymap("n", "<F14>", "<Leader>", {})
-set_keymap("n", "<F15>", "<cmd>bnext<cr>", {})
-set_keymap("v", "<F13>", "<cmd>bprev<cr>", {})
+set_keymap({ "n", "v" }, "<F13>", vim.cmd.bprev)
+set_keymap("n", "<F14>", "<Leader>")
+set_keymap({ "n", "v" }, "<F15>", vim.cmd.bnext)
 
 -- other keymaps
-set_keymap("n", "<C-B>", "Bi", {})
-set_keymap("i", "<C-B>", "<Esc>Bi", {})
-set_keymap("n", "<C-W>d", "", { callback = vim.diagnostic.open_float })
-set_keymap("n", "<Esc>", "<cmd>nohlsearch<cr>", {})
-set_keymap("n", "<F5>", "<cmd>update<cr>", {})
-set_keymap("n", "<F6>", "<cmd>!%:p<cr>", {}) -- execute current file
+set_keymap("n", "<C-B>", "Bi")
+set_keymap("i", "<C-B>", "<Esc>Bi")
+set_keymap("n", "<C-W>d", vim.diagnostic.open_float)
+set_keymap("n", "<Esc>", vim.cmd.nohlsearch)
+set_keymap("n", "<F5>", vim.cmd.update)
+set_keymap("n", "<F6>", "<cmd>!%:p<cr>") -- execute current file
