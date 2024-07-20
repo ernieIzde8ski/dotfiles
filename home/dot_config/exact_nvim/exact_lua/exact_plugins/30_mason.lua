@@ -15,13 +15,25 @@ local function _keymap_opts(name)
     return { noremap = true, silent = true, callback = vim.lsp.buf[name] }
 end
 
----@param args { buf: number }
+---@param args { buf: number, data: any }
 ---@return nil
 local function on_lsp_attach(args)
     local bufnr = args.buf
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+
     for key, map in pairs(_lsp_keymaps) do
         local opts = _keymap_opts(map)
         vim.api.nvim_buf_set_keymap(bufnr, "n", key, "", opts)
+    end
+
+    if client ~= nil and client.supports_method("textDocument/inlayHint") then
+        vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+        vim.keymap.set("n", "<leader>i", function()
+            vim.lsp.inlay_hint.enable(
+                not vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr }),
+                { bufnr = bufnr }
+            )
+        end, { buffer = bufnr })
     end
 end
 
@@ -52,7 +64,10 @@ local lspconfig_server_configs = {
 return {
     {
         "neovim/nvim-lspconfig",
-        dependencies = { "mrded/nvim-lsp-notify" },
+        dependencies = {
+            "mrded/nvim-lsp-notify",
+            "felpafel/inlay-hint.nvim",
+        },
         config = function()
             vim.api.nvim_create_autocmd("LspAttach", { callback = on_lsp_attach })
         end,

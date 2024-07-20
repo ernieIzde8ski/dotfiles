@@ -91,10 +91,15 @@ return {
         },
     },
 
-    -- other display stuff
+    -- LSP display
     {
         "mrded/nvim-lsp-notify",
         dependencies = { "rcarriga/nvim-notify" },
-        opts = {},
+        config = true,
+    },
+
+    {
+        "felpafel/inlay-hint.nvim",
+        config = true,
     },
 }
