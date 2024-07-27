@@ -1,13 +1,14 @@
 #!/bin/zsh
 
 if lsd_path="$(command -v 'lsd')"; then
-    alias ls="$lsd_path"
+    alias ls="$lsd_path --git"
 else
     alias ls="ls --color=auto"
 fi
 
 alias ll="ls -l"
 alias la="ls -A"
+alias lA="ls -lA"
 
 alias choice='shuf -en1'
 alias info='info --vi-keys'
