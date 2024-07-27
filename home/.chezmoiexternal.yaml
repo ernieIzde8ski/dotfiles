@@ -1,10 +1,9 @@
-##### neovim plugin manager
+##### neovim dotfiles
 
-".local/share/nvim/lazy/lazy.nvim":
+".config/nvim":
   type:           "git-repo"
-  url:            "https://github.com/folke/lazy.nvim.git"
-  refreshPeriod:  "168h"
-  clone.args: ["--branch", "stable"]
+  url:            "https://github.com/ernieIzde8ski/dotfiles.nvim.git"
+  refreshPeriod:  "12h"
 
 ##### zsh plugins
 
