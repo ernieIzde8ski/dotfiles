@@ -1,7 +1,7 @@
 #!/bin/zsh
+# This file sets PATH and XDG Base Directory folders
 
-# variables we need for $PATH
-
+### XDG Base Directory
 export XDG_BIN_HOME="${XDG_BIN_HOME:-$HOME/.local/bin}"
 export XDG_CACHE_HOME="${XDG_CACHE_HOME:-$HOME/.cache}"
 export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
@@ -9,8 +9,11 @@ export XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
 export XDG_STATE_HOME="${XDG_STATE_HOME:-$HOME/.local/state}"
 
 
-export CABAL_DIR="${CABAL_DIR:-$XDG_DATA_HOME/cabal}"
+### Make programs respect XDG Base Directory
 export INDARYS="/mnt/indarys"
+
+export CABAL_DIR="${CABAL_DIR:-$XDG_DATA_HOME/cabal}"
+export GHCUP_USE_XDG_DIRS=true
 
 export RUSTUP_HOME="${RUSTUP_HOME:-$XDG_DATA_HOME/rustup}"
 export CARGO_HOME="${CARGO_HOME:-$XDG_DATA_HOME/cargo}"
@@ -19,9 +22,14 @@ export CARGO_HOME="${CARGO_HOME:-$XDG_DATA_HOME/cargo}"
 export FFMPEG_DATADIR="${FFMPEG_DATADIR:-$XDG_CONFIG_HOME/ffmpeg}"
 export NPM_CONFIG_USERCONFIG="${NPM_CONFIG_USERCONFIG:-$XDG_CONFIG_HOME/npm/npmrc}"
 export RIPGREP_CONFIG_PATH="${RIPGREP_CONFIG_PATH:-$XDG_CONFIG_HOME/ripgrep/config}"
+export WINEPREFIX="${WINEPREFIX:-$XDG_DATA_HOME/wine}"
 
-# actual additions to $PATH
+if [[ ! "$MANPATH" =~ ":$HOME\\b" ]]; then
+    export MANPATH="$MANPATH:$XDG_DATA_HOME/man"
+fi
 
+
+### Set PATH directory
 # prevent duplicating keys in subshells
 typeset -aU path
 
