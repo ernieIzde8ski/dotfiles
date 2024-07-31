@@ -6,15 +6,6 @@
 # make sure Python venvs don't override the prompt
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 
-
-function prompt_exit_code {
-  if [[ $? -eq 0 ]]; then
-    echo -n "%F{green}%?%f"
-  else
-    echo -n "%F{red}%?%f"
-  fi
-}
-
 function prompt_venv {
   if [[ -v VIRTUAL_ENV ]]; then
     echo -n "%F{yellow}(venv) %f"
@@ -22,21 +13,26 @@ function prompt_venv {
 }
 
 function prompt_workstation {
-  # printing out red for root, cyan for anyone else
+  # printing out red for root, green for anyone else
   if [[ $UID -eq 0 ]]; then
-    c_main="%F{cyan}"
-    c_alt="%F{red}"
+    user_color="%F{red}"
   else
-    c_main="%F{blue}"
-    c_alt="%F{cyan}"
+    user_color="%F{blue}"
   fi
 
-  echo -n "${c_main}%n${c_alt}@"
-  echo -n "${c_main}%m${c_alt}::"
-  echo -n "${c_main}%1~${c_alt}%# %f"
+  echo -n "${user_color}%n%F{green}@"
+  echo -n "${user_color}%m%F{green}::"
+  echo -n "${user_color}%1~%F{green}%# %f"
 }
 
 # with this option, we can delay evaluation using "\$(command)" syntax
 setopt prompt_subst
 
-PROMPT="[%F{magenta}%L%f \$(prompt_exit_code)] \$(prompt_venv)$(prompt_workstation)"
+precmd() {
+  code=$?
+  if ! [[ $code -eq 0 || $code -eq 130 ]]; then
+    print "Process exited with code $code"
+  fi
+}
+
+PROMPT="[%F{magenta}%L%f] \$(prompt_venv)$(prompt_workstation)"
