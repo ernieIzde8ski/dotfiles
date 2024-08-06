@@ -4,6 +4,10 @@
 **/__pycache__
 .config/zsh/.zcompdump
 
+{{ if not (lookPath "cargo") }}
+    .local/share/cargo/
+{{ end }}
+
 {{ if not (lookPath "micro") }}
     .config/micro/
 {{ end }}
@@ -11,7 +15,6 @@
 {{ if not (lookPath "npm") }}
     .config/npm/
 {{ end }}
-
 
 {{ if not (lookPath "zsh") }}
     .zshrc
@@ -40,6 +43,10 @@
 
     {{ if not (lookPath "konsole") }}
         .local/share/konsole/
+    {{ end }}
+
+    {{ if not (lookPath "wezterm") }}
+        .config/wezterm/
     {{ end }}
 
     {{ if not (and (lookPath "pipewire-pulse") (lookPath "wireplumber")) }}
