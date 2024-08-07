@@ -29,14 +29,9 @@
 
 
 # --- xserver-dependent bindings
-{{ $isNotRoot := eq .chezmoi.uid "0" | not }}
+{{ $isRoot := eq .chezmoi.uid "0" }}
 
-{{ if .isXServer }}
-    # *only* remote servers should have this
-    .ssh/authorized_keys
-{{ end }}
-
-{{ if and $isNotRoot .isXServer }}
+{{ if and .isXServer (not $isRoot) }}
     {{ if not (lookPath "Discord") }}
         .config/discord/
     {{ end }}
