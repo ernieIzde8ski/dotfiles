@@ -1,5 +1,3 @@
-local wezterm = require("wezterm")
-
 local color_schemes = require("color_schemes")
 
 local config = {
@@ -8,11 +6,7 @@ local config = {
 
     color_scheme = color_schemes.random(),
 
-    font = wezterm.font_with_fallback({
-        "CommitMonoErnie",
-        "Comic Shanns Mono",
-        "ComicShannsMonoNerdFont",
-    }),
+    font = require("fallback_fonts").setup(),
     font_size = 13.0,
 
     prefer_to_spawn_tabs = true,
