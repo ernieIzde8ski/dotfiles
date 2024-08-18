@@ -1,20 +1,43 @@
 [user]
-	name       = Ernest Izdebski
-	email      = 44341687+ernieIzde8ski@users.noreply.github.com
-	signingKey = "{{ .gpgSigningKey }}"
+    name       = Ernest Izdebski
+    # TODO: switch to a ratbot.org email
+    email      = 44341687+ernieIzde8ski@users.noreply.github.com
+    signingKey = "{{ .gpgSigningKey }}"
 
 [alias]
     amend = "commit --amend"
+    cm    = "!git -C '{{ .chezmoi.homeDir }}/.local/share/chezmoi/'"
     graph = "log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all"
+    patch = "add --patch"
     pushf = "push --force-with-lease"
+    ps    = "-p status"
     root  = "rev-parse --show-toplevel"
+    track = "add -AN"
     wd    = "diff --word-diff"
 
 [branch]
     sort = -committerdate
 
 [commit]
-    gpgSign = true
+    cleanup     = "strip"
+    gpgSign     = true
+
+[core]
+    autocrlf    = false
+    protectHFS  = true
+    protectNTFS = true
+    eol         = "lf"
+
+{{ if lookPath "nvimdiff" -}}
+
+[diff]
+    prompt  = false
+    tool    = "nvimdiff"
+
+{{ end -}}
+
+[help]
+    autocorrect = prompt
 
 [init]
     defaultBranch = master
@@ -25,11 +48,25 @@
 [pull]
     rebase = true
 
+[rebase]
+    abbreviateCommands  = true
+    autoSquash          = true
+    autoStash           = true
+    missingCommitsCheck = "error"
+
 [rerere]
-    enabled = true
+    autoUpdate  = true
+    enabled     = true
 
+[status]
+    aheadBehind         = true
+    branch              = true
+    relativePaths       = false
+    renames             = "copy"
+    showStash           = true
+    showUntrackedFiles  = normal
 
-{{- if lookPath "gh" }}
+{{ if lookPath "gh" -}}
 
 [credential "https://github.com"]
     helper =
@@ -39,4 +76,4 @@
     helper =
     helper = !/usr/bin/gh auth git-credential
 
-{{- end }}
+{{ end -}}
