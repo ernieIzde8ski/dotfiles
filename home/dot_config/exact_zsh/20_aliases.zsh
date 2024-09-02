@@ -14,10 +14,8 @@ alias choice='shuf -en1'
 alias info='info --vi-keys'
 alias sizeof="du -sh --"
 alias ...=../..
-
-if command -v perl-rename &>/dev/null; then
-    alias rename=perl-rename
-fi
+alias prname=perl-rename
+alias ccr=cookiecutter
 
 function cdas {
     if [[ "$#" -eq 0 ]]; then
@@ -38,3 +36,9 @@ function edas {
         done
     fi
 }
+
+# executes a process in the background, silently
+function silent {
+    $@ &>/dev/null &!
+}
+alias si=silent
