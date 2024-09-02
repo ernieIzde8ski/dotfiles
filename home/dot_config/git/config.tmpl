@@ -11,6 +11,7 @@
     patch = "add --patch"
     pushf = "push --force-with-lease"
     ps    = "-p status"
+    recommit   = "!git commit -eF $(git rev-parse --git-dir)/COMMIT_EDITMSG"
     root  = "rev-parse --show-toplevel"
     track = "add -AN"
     wd    = "diff --word-diff"
