@@ -6,7 +6,6 @@ M.dark_themes = {
     "Bamboo Multiplex",
     "Canvased Pastel (terminal.sexy)",
     "Count Von Count (terminal.sexy)",
-    "Crayon Pony Fish (Gogh)",
     "Earthsong",
     "Ef-Autumn",
     "Ef-Cherie",
