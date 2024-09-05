@@ -15,6 +15,7 @@
     root  = "rev-parse --show-toplevel"
     track = "add -AN"
     wd    = "diff --word-diff"
+    word-patch = "!git -c interactive.diffFilter='diff-highlight | less -FRX --tabs=4' add --patch"
 
 [branch]
     sort = -committerdate
