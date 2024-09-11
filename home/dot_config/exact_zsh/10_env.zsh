@@ -1,7 +1,12 @@
 #!/bin/zsh
 
-export GPG_TTY=$TTY             # fix "error: gpg failed to sign the data" in `git commit`
-export LESSCHARSET="utf-8"      # fix manual pages rendering some chars incorrectly
+if [[ -o interactive ]]; then
+    # fix "error: gpg failed to sign the data" in `git commit`
+    export GPG_TTY=$TTY
+fi
+
+# fix manual pages rendering some chars incorrectly
+export LESSCHARSET="utf-8"
 
 
 editors=("nvim" "vim")

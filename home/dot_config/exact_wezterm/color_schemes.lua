@@ -1,14 +1,37 @@
 local M = {}
--- commented themes are only in nightly builds
+---@class Themes: string[]
+---@field random fun(self): string
 
----@type string[]
-M.dark_themes = {
+---Returns a random valid theme.
+---@param theme_options Themes
+---@return string | nil
+local function colorscheme_choice(theme_options)
+    local wezterm = require("wezterm")
+
+    local valid_colorschemes = wezterm.get_builtin_color_schemes()
+
+    local i_k = 0
+    while i_k < 10 do
+        local i = math.random(#theme_options + 1)
+        local res = theme_options[i]
+        if valid_colorschemes[res] ~= nil then
+            return res
+        end
+        i_k = i_k + 1
+    end
+
+    return nil
+end
+
+---@type Themes
+M.dark_schemes = {
     "Bamboo Multiplex",
     "Canvased Pastel (terminal.sexy)",
     "Count Von Count (terminal.sexy)",
     "Earthsong",
     "Ef-Autumn",
     "Ef-Cherie",
+    "Ef-Cyprus",
     "Ef-Deuteranopia-Dark",
     "Ef-Duo-Dark",
     "Ef-Elea-Dark",
@@ -23,17 +46,16 @@ M.dark_themes = {
     "Pretty and Pastel (terminal.sexy)",
     "Solarized Dark (Gogh)",
     "Solarized Dark Higher Contrast (Gogh)",
+    random = colorscheme_choice,
 }
 
----@type string[]
-M.light_themes = {
+---@type Themes
+M.light_schemes = {
     "Bamboo Light",
-    -- "Blue Dolphin (Gogh)",
+    "Blue Dolphin (Gogh)",
     "Bluloco Zsh Light (Gogh)",
     "BlueDolphin", -- disable when we enable Blue Dolphin (Gogh)
-    "Crayon Pony Fish (Gogh)",
     "Ef-Arbutus",
-    "Ef-Cyprus",
     "Ef-Deuteranopia-Light",
     "Ef-Duo-Light",
     "Ef-Elea-Light",
@@ -44,24 +66,16 @@ M.light_themes = {
     "Embers (light) (terminal.sexy)",
     "Greenscreen (light) (terminal.sexy)",
     "Solarized Light (Gogh)",
+    random = colorscheme_choice,
 }
-
----Returns a random element from an array.
----@generic T
----@param arr T[]
----@return T
-local function choice(arr)
-    local n = math.random(#arr + 1)
-    return arr[n]
-end
 
 ---Picks a random theme based off the current environment.
 ---@return string -- Theme name.
 function M.random()
     if os.getenv("IS_WORK_MACHINE") == "true" then
-        return choice(M.light_themes)
+        return M.light_schemes:random()
     else
-        return choice(M.dark_themes)
+        return M.dark_schemes:random()
     end
 end
 

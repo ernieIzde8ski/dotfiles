@@ -1,6 +1,6 @@
 default_context:
-    author_name: "Ernest Izdebski"
-    author_email: "44341687+ernieIzde8ski@users.noreply.github.com"
+    author_name:  "Ernest Izdebski"
+    author_email: {{ .gpgEmail | quote }}
     github_username: "ernieIzde8ski"
     initial_version: "0.1.0"
 cookiecutters_dir: "{{ .chezmoi.homeDir }}/.local/share/cookiecutters/"

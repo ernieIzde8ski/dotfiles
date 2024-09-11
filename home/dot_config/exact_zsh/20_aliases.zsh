@@ -1,5 +1,9 @@
 #!/bin/zsh
 
+if bpyright="$(command -v 'basedpyright')"; then
+    alias pyright="$bpyright"
+fi
+
 if lsd_path="$(command -v 'lsd')"; then
     alias ls="$lsd_path --git"
 else
@@ -41,4 +45,5 @@ function edas {
 function silent {
     $@ &>/dev/null &!
 }
+
 alias si=silent

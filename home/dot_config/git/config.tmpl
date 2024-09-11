@@ -1,8 +1,8 @@
 [user]
     name       = Ernest Izdebski
     # TODO: switch to a ratbot.org email
-    email      = 44341687+ernieIzde8ski@users.noreply.github.com
-    signingKey = "{{ .gpgSigningKey }}"
+    email      = {{ .gpgEmail | quote }}
+    signingKey = {{ .gpgSigningKey | quote }}
 
 [alias]
     amend = "commit --amend"

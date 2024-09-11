@@ -1,9 +1,12 @@
 {{ $isXServer := promptBoolOnce . "isXServer" "Is this machine running an X11 server? " true -}}
 
+{{ $isWork := promptBoolOnce . "isWork" "Is this a work user? " false -}}
+
+{{ $gpgEmail := "44341687+ernieIzde8ski@users.noreply.github.com" -}}
+{{ $gpgEmail := promptStringOnce . "gpgEmail" "git email: " $gpgEmail -}}
+
 {{ $gpgSigningKey := "5C9DBF62D9602C233202F06A24E767FED21795D5" -}}
 {{ $gpgSigningKey := promptStringOnce . "gpgSigningKey" "GPG signing key: " $gpgSigningKey -}}
-
-{{ $isWork := promptBoolOnce . "isWork" "Is this a work user? " false -}}
 
 # the following lines were automatically written by a little old lady from Leningrad
 # she'll appreciate it if you run `chezmoi cd ~` and edit `.chezmoi.yaml.tmpl`
@@ -13,14 +16,9 @@ add:
     templateSymlinks: true
 edit:
     apply: true
-# no longer useful: no more `encrypted_` files
-#
-# encryption: "gpg"
-# gpg:
-#     recipient: "5C9DBF62D9602C233202F06A24E767FED21795D5"
 mode: "symlink"
-
 data:
     gpgSigningKey: {{ $gpgSigningKey | quote}}
+    gpgEmail: {{ $gpgEmail | quote }}
     isXServer: {{ $isXServer }}
     isWork: {{ $isWork }}
