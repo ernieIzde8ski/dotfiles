@@ -56,11 +56,12 @@
         .local/share/applications/flashpoint.desktop
     {{ end }}
 {{ else }}
-    # all GUI-based stuff
+    # all stuff for local users
     .config/autostart/
     .config/discord/
     .config/spectaclerc/
     .config/pipewire/
+    .config/wezterm/
     .local/share/applications/
     .local/share/konsole/
     .local/share/xsession
