@@ -1,0 +1,29 @@
+#!/usr/bin/env xonsh
+
+from pathlib import Path
+from subprocess import CalledProcessError
+import sys
+from typing import Annotated
+
+try:
+    import typer
+except ModuleNotFoundError:
+    pipx inject xonsh typer
+    import typer
+
+app = typer.Typer()
+
+@app.command()
+def main(files: Annotated[list[Path] | None, typer.Argument()] = None):
+    $RAISE_SUBPROC_ERROR = True
+
+    try:
+        git rev-parse
+        if not files:
+            git ls-files --others --exclude-standard -z | xargs -0 git add -N --
+        else:
+            git add -N -- @(files)
+    except CalledProcessError as err:
+        raise typer.Exit(code=err.returncode)
+
+app()

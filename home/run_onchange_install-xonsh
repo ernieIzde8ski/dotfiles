@@ -1,0 +1,12 @@
+#!/bin/sh
+
+set -e
+
+command -V pipx >/dev/null
+command -V jq >/dev/null
+
+if pipx list --json | jq -e '.venvs | has("xonsh")' >/dev/null; then
+    echo "xonsh already installed through pipx! :)"
+else
+    pipx install xonsh
+fi
