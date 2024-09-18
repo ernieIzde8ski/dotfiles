@@ -72,10 +72,10 @@ M.light_schemes = {
 ---Picks a random theme based off the current environment.
 ---@return string -- Theme name.
 function M.random()
-    if os.getenv("IS_WORK_MACHINE") == "true" then
-        return M.light_schemes:random()
-    else
+    if os.getenv("DARK_MODE") == "true" then
         return M.dark_schemes:random()
+    else
+        return M.light_schemes:random()
     end
 end
 

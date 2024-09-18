@@ -1,10 +1,10 @@
 [Appearance]
 AntiAliasFonts=true
 BoldIntense=true
-ColorScheme=    {{- if .isWork -}}
-                    BlackOnLightYellow
-                {{- else -}}
+ColorScheme=    {{- if .darkMode -}}
                     Breeze
+                {{- else -}}
+                    BlackOnLightYellow
                 {{- end}}
 DimmValue=64
 EmojiFont=Noto Sans,10,-1,0,50,0,0,0,0,0
