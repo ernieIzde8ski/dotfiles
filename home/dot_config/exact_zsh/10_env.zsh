@@ -20,7 +20,12 @@ done
 ZSH_CACHE_HOME="${ZSH_CACHE_HOME:-$XDG_CACHE_HOME/zsh}"-
 [[ -d "$ZSH_CACHE_HOME" ]] || mkdir -p "$ZSH_CACHE_HOME"
 
-HISTFILE="$ZSH_CACHE_HOME/history"
+if [[ -v ALT_ZSH_RUNTIME_DIR ]]; then
+    export HISTFILE="$ALT_ZSH_RUNTIME_DIR/histfile"
+else
+    unset HISTFILE
+fi
+
 autoload -Uz compinit
 compinit -d "$ZSH_CACHE_HOME/zcompdump-$ZSH_VERSION"
 zstyle ':completion:*' cache-path "$ZSH_CACHE_HOME/zcompcache"

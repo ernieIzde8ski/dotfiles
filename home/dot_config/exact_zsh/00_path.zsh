@@ -30,6 +30,19 @@ if [[ ! "$MANPATH" =~ ":$HOME\\b" ]]; then
     export MANPATH="$MANPATH:$XDG_DATA_HOME/man"
 fi
 
+if [[ -v XDG_RUNTIME_DIR ]]; then
+    export ALT_ZSH_RUNTIME_DIR="${ALT_ZSH_RUNTIME_DIR:-$XDG_RUNTIME_DIR}/zsh"
+elif df -TP '/tmp' | grep -q 'tmpfs'; then
+    export ALT_ZSH_RUNTIME_DIR="/tmp/zsh-$USER"
+else
+    echo "Couldn't set a suitable" '$ALT_ZSH_RUNTIME_DIR!' 1>&2
+    echo 'Please enable $XDG_RUNTIME_DIR or mount /tmp as tmpfs to fix this.' 1>&2
+fi
+
+if [[ -v ALT_ZSH_RUNTIME_DIR && ! -d "$ALT_ZSH_RUNTIME_DIR" ]]; then
+    mkdir "$ALT_ZSH_RUNTIME_DIR"
+    chmod u+rwx,g-rwx,o-rwx $ALT_ZSH_RUNTIME_DIR
+fi
 
 ### Set PATH directory
 # prevent duplicating keys in subshells
