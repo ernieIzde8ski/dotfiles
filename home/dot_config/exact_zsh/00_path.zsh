@@ -31,7 +31,7 @@ if [[ ! "$MANPATH" =~ ":$HOME\\b" ]]; then
 fi
 
 if [[ -v XDG_RUNTIME_DIR ]]; then
-    export ALT_ZSH_RUNTIME_DIR="${ALT_ZSH_RUNTIME_DIR:-$XDG_RUNTIME_DIR}/zsh"
+    export ALT_ZSH_RUNTIME_DIR="${ALT_ZSH_RUNTIME_DIR:-$XDG_RUNTIME_DIR/zsh}"
 elif df -TP '/tmp' | grep -q 'tmpfs'; then
     export ALT_ZSH_RUNTIME_DIR="/tmp/zsh-$USER"
 else
