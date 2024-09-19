@@ -17,7 +17,7 @@ for editor in $editors; do
 done
 
 
-ZSH_CACHE_HOME="${ZSH_CACHE_HOME:-$XDG_CACHE_HOME/zsh}"-
+ZSH_CACHE_HOME="${ZSH_CACHE_HOME:-$XDG_CACHE_HOME/zsh}"
 [[ -d "$ZSH_CACHE_HOME" ]] || mkdir -p "$ZSH_CACHE_HOME"
 
 if [[ -v ALT_ZSH_RUNTIME_DIR ]]; then
