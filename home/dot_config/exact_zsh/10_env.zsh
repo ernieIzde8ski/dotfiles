@@ -21,6 +21,7 @@ ZSH_CACHE_HOME="${ZSH_CACHE_HOME:-$XDG_CACHE_HOME/zsh}"
 [[ -d "$ZSH_CACHE_HOME" ]] || mkdir -p "$ZSH_CACHE_HOME"
 
 if [[ -v ALT_ZSH_RUNTIME_DIR ]]; then
+    setopt SHARE_HISTORY
     export HISTFILE="$ALT_ZSH_RUNTIME_DIR/histfile"
 else
     unset HISTFILE
