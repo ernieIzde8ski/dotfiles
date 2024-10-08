@@ -1,0 +1,46 @@
+# dev tools
+[tool.ruff]
+line-length     = 90
+indent-width    = 4
+target-version  = "py312"
+
+[tool.ruff.format]
+docstring-code-format = true
+line-ending = "lf"
+skip-magic-trailing-comma = true
+
+[tool.basedpyright]
+reportImplicitStringConcatenation = false
+pythonVersion = "3.12"
+
+# packaging
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dotfiles.pyutils"
+authors = [
+    { name="Ernest Izdebski", email="44341687+ernieIzde8ski@users.noreply.github.com" }
+]
+description = "All of the commands that I don't want to write in POSIX shell."
+readme = { file = "README.md", content-type="text/markdown" }
+requires-python = ">=3.12"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dynamic = ["dependencies", "version"]
+scripts = { "mkproject" = "dotfiles_pyutils.mkproject:app" }
+
+[project.urls]
+Homepage = "https://github.com/ernieIzde8ski/pyutils"
+Issues =  "https://github.com/ernieIzde8ski/pyutils/issues"
+
+[tool.setuptools.dynamic]
+dependencies = { file = "requirements.txt" }
+version = { attr = "dotfiles_pyutils.__version__" }
+
+[tool.setuptools.packages.find]
+where = ["src"]
