@@ -1,6 +1,14 @@
-.ruff_cache
-.nvim.lua
 .rgignore
+
+# cache directories
+# these tend to already contain a `.gitignore` with `.*`,
+# but then they just show up in IDEs as empty directories
+.ruff_cache
+.mypy_cache
 .venv
-.vscode/
 venv
+*_venv
+
+# editor configs
+.nvim.lua
+.vscode
