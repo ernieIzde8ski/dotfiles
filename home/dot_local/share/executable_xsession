@@ -15,15 +15,3 @@ if command -v pipewire; then
     # black magick: pipewire is VERY unhappy with spawning `pipewire-pulse` & `wireplumber` manually.
     # May8e it does this already? I don't know.
 fi
-
-{{ if not .isWork -}}
-if mountpoint -q /mnt/uvirith; then
-    if command -v nicotine; then
-        nicotine --hidden &
-    fi
-
-    if command -v clementine; then
-        clementine &
-    fi
-fi
-{{ end }}
