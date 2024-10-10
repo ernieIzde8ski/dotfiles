@@ -16,8 +16,3 @@ done
 for script in "$HOME/.local/share/zsh_plugins/"**/*.plugin.zsh; do
     source "$script"
 done
-
-# finishing stuff
-if command -v zoxide &>/dev/null; then
-    eval "$(zoxide init zsh)"
-fi
