@@ -7,7 +7,7 @@ from typing import Annotated, cast
 
 import typer
 
-from ._abort import abort
+from ._crash import crash
 
 app = typer.Typer()
 
@@ -20,6 +20,22 @@ LOCAL_DIRECTORY = Path(f"{_HOME}/.local/state/cc-templates")
 TEMPLATE_DIRECTORIES = (EXTERNAL_DIRECTORY, LOCAL_DIRECTORY)
 
 GIT_URL = r"https://github.com/ernieIzde8ski/cc-templates.git"
+EPILOG = f"""
+Creates a new project in a subfolder of the current directory,
+using cookiecutter templates from this repository:
+
+\b
+
+\b\t{GIT_URL}
+
+\b
+
+mkproject sources templates from these directories, if available:
+
+\b
+
+\b\t{"\n\n\b\t".join(p.as_posix() for p in TEMPLATE_DIRECTORIES)}
+"""
 
 
 def get_templates(ensure_exists: bool | None):
@@ -57,7 +73,7 @@ def list_templates(ctx: typer.Context, value: bool | None):
     raise typer.Exit()
 
 
-@app.command()
+@app.command(epilog=EPILOG)
 def main(
     template_name: Annotated[str, typer.Argument(help="Name of template to generate.")],
     ensure_exists: Annotated[
@@ -85,7 +101,7 @@ def main(
     template = next(templates, None)
 
     if template is None:
-        abort("No template with given name:", repr(template_name))
+        crash("No template with given name:", repr(template_name))
     from cookiecutter.main import cookiecutter
 
     fp = cast(str, cookiecutter(template=str(template)))

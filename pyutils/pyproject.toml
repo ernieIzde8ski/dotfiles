@@ -32,11 +32,14 @@ classifiers = [
     "Operating System :: OS Independent",
 ]
 dynamic = ["dependencies", "version"]
-scripts = { "mkproject" = "dotfiles_pyutils.mkproject:app" }
+
+[project.scripts]
+mkproject = "dotfiles_pyutils.mkproject:app"
+"confirm-action" = "dotfiles_pyutils.confirm_action:app"
 
 [project.urls]
-Homepage = "https://github.com/ernieIzde8ski/pyutils"
-Issues =  "https://github.com/ernieIzde8ski/pyutils/issues"
+Homepage = "https://github.com/ernieIzde8ski/dotfiles/pyutils"
+Issues =  "https://github.com/ernieIzde8ski/dotfiles/issues"
 
 [tool.setuptools.dynamic]
 dependencies = { file = "requirements.txt" }
