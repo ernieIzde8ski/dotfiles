@@ -1,0 +1,15 @@
+[Desktop Entry]
+Categories=Utility;Debugger;FileTools;ConsoleOnly;
+Comment[es_ES]=Minimalistic but powerful console hex editor
+Comment=Minimalistic but powerful console hex editor
+Exec=hyx %f
+GenericName[es_ES]=Hex Editor
+GenericName=Hex Editor
+Icon=symboleditor
+MimeType=application/octet-stream;
+Name[es_ES]=hyx
+Name=hyx
+StartupNotify=true
+Terminal=true
+Type=Application
+X-KDE-SubstituteUID=false

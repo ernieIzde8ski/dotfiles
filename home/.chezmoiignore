@@ -48,6 +48,10 @@
         .config/pipewire/
     {{ end }}
 
+    {{ if not (lookPath "hyx") }}
+        .local/share/applications/hyx.desktop
+    {{ end }}
+
     {{ if not (stat "/opt/Pesterchum") }}
         .local/share/applications/pesterchum.desktop
     {{ end }}
