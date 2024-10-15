@@ -13,6 +13,8 @@ fi
 alias ll="ls -l"
 alias la="ls -A"
 alias lA="ls -lA"
+alias ld="ls -d"
+alias lD="ls -ld"
 
 alias choice='shuf -en1'
 alias info='info --vi-keys'
