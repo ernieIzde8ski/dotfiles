@@ -56,7 +56,7 @@ def get_templates(ensure_exists: bool | None):
         result = LOCAL_DIRECTORY
         parent = result.parent
         parent.mkdir(exist_ok=True, parents=True)
-        _ = subprocess.check_output(("git", "-C", parent, "clone", result))
+        _ = subprocess.check_output(("git", "-C", parent, "clone", GIT_URL, result))
 
     for path in (result / "templates").iterdir():
         if path.is_dir() and (path / "cookiecutter.json").exists():
