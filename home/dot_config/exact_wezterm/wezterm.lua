@@ -6,6 +6,8 @@ local config = {
 
     color_scheme = color_schemes.random(),
 
+    enable_scroll_bar = true,
+
     font = require("fallback_fonts").setup(),
     font_size = 13.0,
 
