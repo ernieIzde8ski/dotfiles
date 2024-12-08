@@ -18,6 +18,7 @@ export GHCUP_USE_XDG_DIRS=true
 export RUSTUP_HOME="${RUSTUP_HOME:-$XDG_DATA_HOME/rustup}"
 export CARGO_HOME="${CARGO_HOME:-$XDG_DATA_HOME/cargo}"
 [ -f "$CARGO_HOME/env" ] && source "$CARGO_HOME/env"
+export ELAN_HOME="${ELAN_HOME:-$XDG_STATE_HOME/elan}"
 
 export COOKIECUTTER_CONFIG="${COOKIECUTTER_CONFIG:-$XDG_CONFIG_HOME/cookiecutterrc}"
 export FFMPEG_DATADIR="${FFMPEG_DATADIR:-$XDG_CONFIG_HOME/ffmpeg}"
@@ -54,7 +55,7 @@ for gem_dir in $(find -maxdepth 4 -name bin "/usr/lib/ruby/gems/" 2>/dev/null); 
 done
 unset gem_dir
 
-prepend_list=("$CABAL_DIR" "$XDG_DATA_HOME/npm" "$CARGO_HOME" "$INDARYS/Random/CEDev" "$HOME/.local")
+prepend_list=("$CABAL_DIR" "$XDG_DATA_HOME/npm" "$ELAN_HOME" "$CARGO_HOME" "$INDARYS/Random/CEDev" "$HOME/.local")
 for prepend_dir in $prepend_list; do
     path=("$prepend_dir/bin" $path)
 done
