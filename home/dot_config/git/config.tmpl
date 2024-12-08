@@ -5,6 +5,9 @@
     signingKey = {{ .gpgSigningKey | quote }}
 
 [alias]
+    # for working with forks
+    upstream-name = !git remote | egrep -o '(upstream|origin)' | tail -1
+
     amend = "commit --amend"
     cm    = "!git -C '{{ .chezmoi.homeDir }}/.local/share/chezmoi/'"
     graph = "log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all"
@@ -13,8 +16,10 @@
     ps    = "-p status"
     recommit   = "!git commit -eF $(git rev-parse --git-dir)/COMMIT_EDITMSG"
     root  = "rev-parse --show-toplevel"
-    wd    = "diff --word-diff"
+    word-diff  = "diff --word-diff"
     word-patch = "!git -c interactive.diffFilter='diff-highlight | less -FRX --tabs=4' add --patch"
+    wd         = "word-diff"
+    wp         = "word-patch"
 
 [branch]
     sort = -committerdate
