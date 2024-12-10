@@ -55,6 +55,10 @@ for gem_dir in $(find -maxdepth 4 -name bin "/usr/lib/ruby/gems/" 2>/dev/null); 
 done
 unset gem_dir
 
+if command -v luarocks &>/dev/null; then
+    eval "$(luarocks path)"
+fi
+
 prepend_list=("$CABAL_DIR" "$XDG_DATA_HOME/npm" "$ELAN_HOME" "$CARGO_HOME" "$INDARYS/Random/CEDev" "$HOME/.local")
 for prepend_dir in $prepend_list; do
     path=("$prepend_dir/bin" $path)
