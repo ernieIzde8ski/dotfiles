@@ -181,3 +181,4 @@ function silent {
 }
 
 alias si=silent
+alias si-open='silent xdg-open'
