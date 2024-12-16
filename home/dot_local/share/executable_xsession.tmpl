@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/zsh
 
 
 # xfree86 is fucking stupid
@@ -27,3 +27,7 @@ if mountpoint -q /mnt/uvirith; then
     fi
 fi
 {{ end }}
+
+if [[ -d /media/caldera ]] && ! mountpoint -1 /media/caldera; then
+    sh -c "sleep 5 && pkexec env DISPLAY=$DISPLAY XAUTHORITY=$XAUTHORITY mount /media/caldera" &!
+fi
