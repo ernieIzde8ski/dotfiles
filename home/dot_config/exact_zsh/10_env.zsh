@@ -9,7 +9,7 @@ fi
 export LESSCHARSET="utf-8"
 
 
-editors=("nvim" "vim")
+editors=("nvim" "vim" "vi")
 for editor in $editors; do
     if editor=$(command -v ${editor} 2>/dev/null); then
         export EDITOR="${editor}" && break;
