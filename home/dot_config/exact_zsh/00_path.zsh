@@ -10,8 +10,6 @@ export XDG_STATE_HOME="${XDG_STATE_HOME:-$HOME/.local/state}"
 
 
 ### Make programs respect XDG Base Directory
-export INDARYS="/mnt/indarys"
-
 export CABAL_DIR="${CABAL_DIR:-$XDG_DATA_HOME/cabal}"
 export GHCUP_USE_XDG_DIRS=true
 
@@ -29,6 +27,12 @@ export WINEPREFIX="${WINEPREFIX:-$XDG_DATA_HOME/wine}"
 
 if [[ ! "$MANPATH" =~ ":$HOME\\b" ]]; then
     export MANPATH="$MANPATH:$XDG_DATA_HOME/man"
+fi
+
+if [[ -d /mnt/indarys ]]; then
+    export INDARYS='/mnt/indarys'
+else
+    export INDARYS="/run/media/$USER/indarys"
 fi
 
 if [[ -v XDG_RUNTIME_DIR ]]; then
@@ -63,6 +67,6 @@ prepend_list=("$CABAL_DIR" "$XDG_DATA_HOME/npm" "$ELAN_HOME" "$CARGO_HOME" "$IND
 for prepend_dir in $prepend_list; do
     path=("$prepend_dir/bin" $path)
 done
-unset prepend_dir
+unset prepend_list prepend_dir
 
 export PATH
