@@ -28,6 +28,6 @@ if mountpoint -q /mnt/uvirith; then
 fi
 {{ end }}
 
-if [[ -d /media/caldera ]] && ! mountpoint -1 /media/caldera; then
+if [[ -d /media/caldera ]] && ! mountpoint /media/caldera; then
     sh -c "sleep 5 && pkexec env DISPLAY=$DISPLAY XAUTHORITY=$XAUTHORITY mount /media/caldera" &!
 fi
