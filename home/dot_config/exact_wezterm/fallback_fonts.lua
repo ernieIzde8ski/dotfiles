@@ -6,8 +6,8 @@
 local wezterm = require("wezterm")
 
 local defaults = {
-    "foobar",
     "CommitMonoErnie",
+    "CommitMonoErnie Nerd Font",
     "Comic Shanns Mono",
     "ComicShannsMonoNerdFont",
 }
