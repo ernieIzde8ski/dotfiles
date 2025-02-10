@@ -1,3 +1,5 @@
+# vim: filetype=zsh
+
 zstyle :compinstall filename "$HOME/.config/zsh/.zshrc"
 
 # Lines configured by zsh-newuser-install
@@ -16,3 +18,10 @@ done
 for script in "$HOME/.local/share/zsh_plugins/"**/*.plugin.zsh; do
     source "$script"
 done
+
+# usage: `LOGIN_TTYS` is an array of TTYs; set `LOGIN_TTYS=("/dev/tty6")`
+# to configure autologin on `tty6`
+[[ -v LOGIN_TTYS ]] || LOGIN_TTYS=()
+if (( ${LOGIN_TTYS[(I)$(tty)]} )) ; then
+    exec startx
+fi
