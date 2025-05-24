@@ -1,5 +1,8 @@
 #!/bin/zsh
 
+
+export XBPS_DISTDIR="$HOME/.local/state/xbps-packages"
+
 if [[ -o interactive ]]; then
     # fix "error: gpg failed to sign the data" in `git commit`
     export GPG_TTY=$TTY
@@ -7,6 +10,8 @@ fi
 
 # fix manual pages rendering some chars incorrectly
 export LESSCHARSET="utf-8"
+export PAGER="less --status-column --LINE-NUMBERS --line-num-width=4 --chop-long-lines --mouse"
+export MANPAGER="$PAGER -RF"
 
 
 editors=("nvim" "vim" "vi")

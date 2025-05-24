@@ -3,13 +3,14 @@
 -- `wezterm` does depend on `fontconfig` though, so we can use `fc-list`
 -- to check what fonts we can use by ourselves.
 
+
 local wezterm = require("wezterm")
 
 local defaults = {
-    "CommitMonoErnie",
     "CommitMonoErnie Nerd Font",
+    "CommitMonoErnie_v1",
     "Comic Shanns Mono",
-    "ComicShannsMonoNerdFont",
+    "ComicShannsMono Nerd Font",
 }
 
 local function available_fallback_fonts()

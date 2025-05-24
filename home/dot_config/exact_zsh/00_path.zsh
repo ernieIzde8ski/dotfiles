@@ -8,6 +8,11 @@ export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
 export XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
 export XDG_STATE_HOME="${XDG_STATE_HOME:-$HOME/.local/state}"
 
+# TODO: this should really be set in /etc/profile or something,
+# not here lmao
+[[ -n "$XDG_DATA_DIRS" ]] || XDG_DATA_DIRS="/usr/local/share:/usr/share"
+export XDG_DATA_DIRS="$XDG_DATA_HOME/flatpak/exports/share:/var/lib/flatpak/exports/share:$XDG_DATA_DIRS"
+
 
 ### Make programs respect XDG Base Directory
 export CABAL_DIR="${CABAL_DIR:-$XDG_DATA_HOME/cabal}"
@@ -17,6 +22,8 @@ export RUSTUP_HOME="${RUSTUP_HOME:-$XDG_DATA_HOME/rustup}"
 export CARGO_HOME="${CARGO_HOME:-$XDG_DATA_HOME/cargo}"
 [ -f "$CARGO_HOME/env" ] && source "$CARGO_HOME/env"
 export ELAN_HOME="${ELAN_HOME:-$XDG_STATE_HOME/elan}"
+
+export LUAROCKS_CONFIG="$HOME/.config/luarocks/config.lua"
 
 export COOKIECUTTER_CONFIG="${COOKIECUTTER_CONFIG:-$XDG_CONFIG_HOME/cookiecutterrc}"
 export FFMPEG_DATADIR="${FFMPEG_DATADIR:-$XDG_CONFIG_HOME/ffmpeg}"

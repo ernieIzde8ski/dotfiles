@@ -1,0 +1,15 @@
+lua_version = "5.1"
+local_by_default = true
+rocks_trees = {
+    {
+        root = "{{.chezmoi.homeDir}}/.local/state/luarocks",
+        name = "user",
+    },
+    {
+        root = "/usr",
+        name = "system",
+    },
+}
+variables = {
+    LUA = "/usr/bin/lua"
+}

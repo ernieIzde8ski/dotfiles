@@ -5,6 +5,14 @@
   url:            "https://github.com/ernieIzde8ski/dotfiles.nvim.git"
   refreshPeriod:  "12h"
 
+##### XBPS
+
+# TODO: ignore this on non-void sistems
+".local/state/xbps-packages":
+  type: "git-repo"
+  url: "https://github.com/void-linux/void-packages"
+  refreshPeriod: "12h"
+
 ##### zsh plugins
 
 ".local/share/zsh_plugins/autoswitch_virtualenv.plugin.zsh":
