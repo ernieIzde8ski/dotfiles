@@ -16,18 +16,20 @@ if command -v pipewire; then
     # May8e it does this already? I don't know.
 fi
 
-{{ if not .isWork -}}
-if mountpoint -q /mnt/uvirith; then
-    if command -v nicotine; then
-        nicotine --hidden &
-    fi
 
-    if command -v clementine; then
-        clementine &
-    fi
-fi
-{{ end }}
+if [[ -d /media ]] && ! mountpoint /media; then (
+    sleep 5
+    doas -n mount /media
 
-if [[ -d /media/caldera ]] && ! mountpoint /media/caldera; then
-    sh -c "sleep 5 && pkexec env DISPLAY=$DISPLAY XAUTHORITY=$XAUTHORITY mount /media/caldera" &!
-fi
+    {{ if not .isWork -}}
+    if mountpoint -q /media; then
+        if command -v nicotine; then
+            nicotine --hidden &
+        fi
+
+        if command -v clementine; then
+            clementine &
+        fi
+    fi
+    {{- end }}
+) &!; fi

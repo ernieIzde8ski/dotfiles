@@ -1,0 +1,7 @@
+#!/bin/sh
+
+# xfree86 is fucking stupid
+xmodmap -e "keycode 191 = F13"
+xmodmap -e "keycode 192 = F14"
+xmodmap -e "keycode 193 = F15"
+xmodmap -e "keycode 194 = F16"
