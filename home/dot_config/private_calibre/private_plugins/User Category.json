@@ -1,0 +1,17 @@
+{
+  "UserCategories": {
+    "Menus": {
+      "authors": true,
+      "publishers": false,
+      "series": true,
+      "tags": false
+    },
+    "OtherMenus": {
+      "add": true,
+      "manage": true,
+      "move": true,
+      "remove": true,
+      "view": true
+    }
+  }
+}

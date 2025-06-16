@@ -16,12 +16,18 @@
 
 add:
     templateSymlinks: true
+mode: "symlink"
+
 edit:
     apply: true
-mode: "symlink"
+
+encryption: gpg
+gpg:
+    symmetric: true
+
 data:
     darkMode: {{ $darkMode }}
-    gpgSigningKey: {{ $gpgSigningKey | quote}}
+    gpgSigningKey: {{ $gpgSigningKey | quote }}
     gpgEmail: {{ $gpgEmail | quote }}
     isXServer: {{ $isXServer }}
     isWork: {{ $isWork }}

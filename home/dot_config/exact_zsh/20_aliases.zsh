@@ -22,6 +22,9 @@ alias info='info --vi-keys'
 alias sizeof="du -sh --"
 alias ...=../..
 alias prname=perl-rename
+alias cz=chezmoi
+alias cza='chezmoi add'
+alias cze='chezmoi edit'
 
 # executes a process in the background, silently
 function silent {

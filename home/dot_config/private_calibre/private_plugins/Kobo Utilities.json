@@ -1,0 +1,15 @@
+{
+  "Devices": {},
+  "backupOptionsStore": {
+    "backupCopiesToKeepSpin": 5,
+    "backupDestDirectory": "",
+    "backupEachCOnnection": false,
+    "backupZipDatabase": true,
+    "doDailyBackp": false
+  },
+  "commonOptionsStore": {
+    "buttonActionDevice": "Refresh the list of books on the device",
+    "buttonActionLibrary": "Customize plugin",
+    "individualDeviceOptions": false
+  }
+}

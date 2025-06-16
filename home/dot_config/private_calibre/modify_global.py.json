@@ -1,0 +1,20 @@
+#!/usr/bin/env python3
+# get real
+# vim: filetype=python
+# pyright: reportAny=false, reportUnusedCallResult=false
+
+import json
+import sys
+
+type JsonObject = str | float | None | list[JsonObject] | dict[str, JsonObject]
+obj: JsonObject = json.loads(sys.stdin.read())
+assert isinstance(obj, dict)
+
+obj["case_sensitive"]   = False
+obj["filename_pattern"] = "(?P<author>[^_]+) - (?P<title>.+)"
+obj["language"]         = "en"
+obj["mark_new_books"]   = False
+obj.setdefault("output_format", "epub")
+
+res = json.dumps(obj, indent=2, sort_keys=True)
+print(res, end="")

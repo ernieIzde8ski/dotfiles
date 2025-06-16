@@ -1,0 +1,13 @@
+{
+  "authors_split_regex": "(?i),?\\s+(and|with)\\s+|;\\s*",
+  "calendar_start_day_of_week": "Monday",
+  "categories_use_field_for_author_name": "author_sort",
+  "default_tweak_format": "EPUB",
+  "enter_key_behavior": "edit_cell",
+  "gui_pubdate_display_format": "yyyy MMM",
+  "restrict_output_formats": [
+    "EPUB",
+    "KEPUB"
+  ],
+  "tab_accepts_uncompleted_text": true
+}
