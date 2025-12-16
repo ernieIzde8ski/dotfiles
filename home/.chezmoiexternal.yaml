@@ -1,10 +1,9 @@
 ##### neovim dotfiles
 
 ".config/nvim":
-  type:           "git-repo"
-  url:            "https://github.com/ernieIzde8ski/dotfiles.nvim.git"
-  refreshPeriod:  "12h"
-
+  type: "git-repo"
+  url: "https://github.com/ernieIzde8ski/dotfiles.nvim.git"
+  refreshPeriod: "12h"
 ##### XBPS
 
 # TODO: ignore this on non-void sistems
@@ -12,30 +11,24 @@
   type: "git-repo"
   url: "https://github.com/void-linux/void-packages"
   refreshPeriod: "12h"
-
 ##### zsh plugins
-
 ".local/share/zsh_plugins/autoswitch_virtualenv.plugin.zsh":
   type: "file"
-  url:  "https://raw.githubusercontent.com/MichaelAquilina/zsh-autoswitch-virtualenv/master/autoswitch_virtualenv.plugin.zsh"
+  url: "https://raw.githubusercontent.com/MichaelAquilina/zsh-autoswitch-virtualenv/master/autoswitch_virtualenv.plugin.zsh"
   refreshPeriod: "168h"
-
 ".local/share/zsh_plugins/fancy-ctrl-z-mode.plugin.zsh":
   type: "file"
-  url:  "https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/plugins/fancy-ctrl-z/fancy-ctrl-z.plugin.zsh"
+  url: "https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/plugins/fancy-ctrl-z/fancy-ctrl-z.plugin.zsh"
   refreshPeriod: "168h"
-
 ".local/share/zsh_plugins/zsh-not-vim/":
   type: "git-repo"
-  url:  "https://github.com/redxtech/zsh-not-vim.git"
+  url: "https://github.com/redxtech/zsh-not-vim.git"
   refreshPeriod: "168h"
-
 ".local/share/zsh_plugins/zsh-syntax-highlighting/":
   type: "git-repo"
-  url:  "https://github.com/zsh-users/zsh-syntax-highlighting.git"
+  url: "https://github.com/zsh-users/zsh-syntax-highlighting.git"
   refreshPeriod: "168h"
-
 ".local/share/zsh_plugins/zsh-vi-mode/":
   type: "git-repo"
-  url:  "https://github.com/jeffreytse/zsh-vi-mode.git"
+  url: "https://github.com/jeffreytse/zsh-vi-mode.git"
   refreshPeriod: "168h"

@@ -3,7 +3,6 @@
 -- `wezterm` does depend on `fontconfig` though, so we can use `fc-list`
 -- to check what fonts we can use by ourselves.
 
-
 local wezterm = require("wezterm")
 
 local defaults = {
