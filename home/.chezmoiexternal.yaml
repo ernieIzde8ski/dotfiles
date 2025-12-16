@@ -1,5 +1,4 @@
 ##### neovim dotfiles
-
 ".config/nvim":
   type: "git-repo"
   url: "https://github.com/ernieIzde8ski/dotfiles.nvim.git"

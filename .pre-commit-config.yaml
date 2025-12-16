@@ -1,22 +1,27 @@
 default_install_hook_types: [pre-commit, pre-push, commit-msg]
 repos:
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: "v0.8.3"
+    rev: "v0.14.9"
     hooks:
       - id: ruff-format
   - repo: https://github.com/JohnnyMorganz/StyLua
-    rev: v2.0.2
+    rev: v2.3.1
     hooks:
       - id: stylua-github
   - repo: "https://github.com/jorisroovers/gitlint"
     rev: "v0.19.1"
-    hooks: [{id: gitlint}]
-  - repo: https://github.com/google/yamlfmt
-    rev: v0.14.0
-    hooks:
-      - id: yamlfmt
+    hooks: [{ id: gitlint }]
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v5.0.0
+    rev: v6.0.0
     hooks:
       - id: end-of-file-fixer
+        exclude: home/dot_config/private_calibre/.*\.json$
       - id: trailing-whitespace
+  # I've given up on trying to get prettier-plugin-toml to work
+  - repo: https://github.com/rbubley/mirrors-prettier
+    rev: v3.6.2
+    hooks:
+      - id: prettier
+        #language_version: 18.20.8
+        exclude: home/dot_config/private_calibre/.*\.json$
+        stages: [pre-commit, pre-merge-commit, pre-push, manual]

@@ -1,0 +1,3 @@
+prettier:
+  plugins: []
+  # plugins: [prettier-plugin-toml]
