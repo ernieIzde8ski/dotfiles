@@ -7,7 +7,7 @@ import json
 import sys
 
 type JsonObject = str | float | None | list[JsonObject] | dict[str, JsonObject]
-data = sys.stdin.read()
+data: str = sys.stdin.read()
 if not data:
     print("{}")
     exit()

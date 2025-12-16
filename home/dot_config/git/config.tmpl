@@ -9,6 +9,7 @@
     upstream-name = !git remote | egrep -o '(upstream|origin)' | tail -1
 
     amend = "commit --amend"
+    ci    = "commit --interactive"
     cm    = "!git -C '{{ .chezmoi.homeDir }}/.local/share/chezmoi/'"
     graph = "log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all"
     patch = "add --patch"

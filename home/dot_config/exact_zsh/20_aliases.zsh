@@ -25,6 +25,7 @@ alias prname=perl-rename
 alias cz=chezmoi
 alias cza='chezmoi add'
 alias cze='chezmoi edit'
+alias czg='chezmoi git --'
 
 # executes a process in the background, silently
 function silent {
@@ -32,4 +33,7 @@ function silent {
 }
 
 alias si=silent
-alias si-open='silent xdg-open'
+alias si-open="silent xdg-open"
+
+alias wi="winget.exe install --accept-package-agreements --accept-source-agreements"
+alias ws="winget.exe search"
