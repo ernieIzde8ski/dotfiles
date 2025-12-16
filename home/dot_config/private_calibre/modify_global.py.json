@@ -7,7 +7,11 @@ import json
 import sys
 
 type JsonObject = str | float | None | list[JsonObject] | dict[str, JsonObject]
-obj: JsonObject = json.loads(sys.stdin.read())
+data = sys.stdin.read()
+if not data:
+    print("{}")
+    exit()
+obj: JsonObject = json.loads(data)
 assert isinstance(obj, dict)
 
 obj["case_sensitive"]   = False

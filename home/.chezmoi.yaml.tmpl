@@ -10,9 +10,16 @@
 {{ $gpgSigningKey := "5C9DBF62D9602C233202F06A24E767FED21795D5" -}}
 {{ $gpgSigningKey := promptStringOnce . "gpgSigningKey" "GPG signing key" $gpgSigningKey -}}
 
+{{ $passphrase := promptStringOnce . "encryptionPassphrase" "Encryption passphrase" }}
+{{ $passphrase := $passphrase | quote }}
+
+
 # the following lines were automatically written by a little old lady from Leningrad
-# she'll appreciate it if you run `chezmoi cd ~` and edit `.chezmoi.yaml.tmpl`
-# but she's not fond of `chezmoi edit ~/.config/chezmoi.yaml`
+# she'll appreciate it if you run:
+#     chezmoi cd ~
+#     "$EDITOR" .chezmoi.yaml.tmpl
+#     chezmoi init
+# but she's NOT fond of `chezmoi edit ~/.config/chezmoi.yaml`
 
 add:
     templateSymlinks: true
@@ -23,11 +30,13 @@ edit:
 
 encryption: gpg
 gpg:
-    symmetric: true
+  symmetric: true
+  args: ["--batch", "--passphrase", {{ $passphrase }}, "--no-symkey-cache"]
 
 data:
-    darkMode: {{ $darkMode }}
-    gpgSigningKey: {{ $gpgSigningKey | quote }}
-    gpgEmail: {{ $gpgEmail | quote }}
-    isXServer: {{ $isXServer }}
-    isWork: {{ $isWork }}
+  darkMode: {{ $darkMode }}
+  encryptionPassphrase: {{ $passphrase }}
+  gpgEmail: {{ $gpgEmail | quote }}
+  gpgSigningKey: {{ $gpgSigningKey | quote }}
+  isWork: {{ $isWork }}
+  isXServer: {{ $isXServer }}
