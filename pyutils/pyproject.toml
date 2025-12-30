@@ -2,7 +2,7 @@
 [tool.ruff]
 line-length     = 90
 indent-width    = 4
-target-version  = "py312"
+target-version  = "py311"
 
 [tool.ruff.format]
 docstring-code-format = true
@@ -11,7 +11,7 @@ skip-magic-trailing-comma = true
 
 [tool.basedpyright]
 reportImplicitStringConcatenation = false
-pythonVersion = "3.12"
+pythonVersion = "3.11"
 
 # packaging
 [build-system]
@@ -25,7 +25,7 @@ authors = [
 ]
 description = "All of the commands that I don't want to write in POSIX shell."
 readme = { file = "README.md", content-type="text/markdown" }
-requires-python = ">=3.12"
+requires-python = ">=3.11"
 classifiers = [
     "Programming Language :: Python :: 3",
     "License :: OSI Approved :: MIT License",

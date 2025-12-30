@@ -5,11 +5,15 @@
   refreshPeriod: "12h"
 ##### XBPS
 
-# TODO: ignore this on non-void sistems
+
+{{ $isVoid := and (eq .chezmoi.os "linux") (eq .chezmoi.osRelease.id "void") }}
+
+{{ if $isVoid }}
 ".local/state/xbps-packages":
   type: "git-repo"
   url: "https://github.com/void-linux/void-packages"
   refreshPeriod: "12h"
+{{ end }}
 ##### zsh plugins
 ".local/share/zsh_plugins/autoswitch_virtualenv.plugin.zsh":
   type: "file"

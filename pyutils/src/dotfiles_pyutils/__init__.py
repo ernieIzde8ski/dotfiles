@@ -7,5 +7,5 @@ __all__ = ["__author__", "__copyright__", "__credits__", "__version__", "__maint
 __author__ = "Ernest Izdebski"
 __copyright__ = "Copyright 2024-present, Ernest Izdebski"
 __credits__ = ["Ernest Izdebski"]
-__version__ = "0.2.0"
+__version__ = "0.2.1"
 __maintainer__ = "Ernest Izdebski"

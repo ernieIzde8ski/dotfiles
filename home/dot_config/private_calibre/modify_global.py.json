@@ -5,8 +5,9 @@
 
 import json
 import sys
+from typing import TypeAlias # python 3.11 support
 
-type JsonObject = str | float | None | list[JsonObject] | dict[str, JsonObject]
+JsonObject: TypeAlias = str | float | None | list["JsonObject"] | dict[str, "JsonObject"]
 data: str = sys.stdin.read()
 if not data:
     print("{}")

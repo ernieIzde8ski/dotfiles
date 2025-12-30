@@ -70,7 +70,7 @@ if command -v luarocks &>/dev/null; then
     eval "$(luarocks path)"
 fi
 
-prepend_list=("$CABAL_DIR" "$XDG_DATA_HOME/npm" "$ELAN_HOME" "$CARGO_HOME" "$INDARYS/Random/CEDev" "$XDG_DATA_HOME/CEdev" "$HOME/.local")
+prepend_list=("/usr/lib/cargo" "$CABAL_DIR" "$XDG_DATA_HOME/npm" "$ELAN_HOME" "$CARGO_HOME" "$INDARYS/Random/CEDev" "$XDG_DATA_HOME/CEdev" "/snap" "$HOME/.local")
 for prepend_dir in $prepend_list; do
     path=("$prepend_dir/bin" $path)
 done
