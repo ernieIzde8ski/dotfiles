@@ -26,6 +26,7 @@ alias cz=chezmoi
 alias cza='chezmoi add'
 alias cze='chezmoi edit'
 alias czg='chezmoi git --'
+alias pyright=basedpyright
 
 # executes a process in the background, silently
 function silent {
