@@ -4,6 +4,9 @@
     email      = {{ .gpgEmail | quote }}
     signingKey = {{ .gpgSigningKey | quote }}
 
+[advice]
+    skippedCherryPicks = false
+
 [alias]
     # for working with forks
     upstream-name = !git remote | egrep -o '(upstream|origin)' | tail -1
